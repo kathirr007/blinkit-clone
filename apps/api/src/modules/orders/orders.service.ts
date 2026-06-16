@@ -1,14 +1,14 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
-  BadRequestException,
 } from '@nestjs/common'
+import { OrderStatus } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { RedisService } from '../../redis/redis.service'
 import { CreateOrderDto } from './dto/create-order.dto'
-import { UpdateOrderStatusDto } from './dto/update-order-status.dto'
 import { QueryOrderDto } from './dto/query-order.dto'
-import { OrderStatus } from '@prisma/client'
+import { UpdateOrderStatusDto } from './dto/update-order-status.dto'
 
 const DELIVERY_FEE_THRESHOLD = 499
 const DELIVERY_FEE = 25
@@ -278,7 +278,8 @@ export class OrdersService {
                   referenceId: id,
                 },
               })
-            } else {
+            }
+            else {
               await tx.inventory.update({
                 where: { id: inventory.id },
                 data: { reservedQuantity: { decrement: item.quantity } },
@@ -378,7 +379,7 @@ export class OrdersService {
     const key = `order:counter:${dateStr}`
 
     const count = await this.redis.get(key)
-    const nextCount = count ? parseInt(count) + 1 : 1
+    const nextCount = count ? Number.parseInt(count) + 1 : 1
     await this.redis.set(key, nextCount.toString(), 86400)
 
     return `BLK-${dateStr}-${nextCount.toString().padStart(5, '0')}`

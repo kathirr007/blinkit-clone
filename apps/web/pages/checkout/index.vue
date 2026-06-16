@@ -1,104 +1,3 @@
-<template>
-  <div class="space-y-6">
-    <h1 class="text-xl font-bold text-gray-900">Checkout</h1>
-
-    <!-- Address Selection -->
-    <section class="card">
-      <div class="flex items-center justify-between mb-4">
-        <h2 class="text-base font-bold text-gray-900">Delivery Address</h2>
-        <button class="text-sm text-[#0c831f] font-medium hover:underline" @click="showAddAddress = true">
-          + Add New
-        </button>
-      </div>
-      <div class="space-y-3">
-        <label
-          v-for="address in addresses"
-          :key="address.id"
-          class="flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors"
-          :class="selectedAddress === address.id ? 'border-[#0c831f] bg-green-50' : 'border-gray-200 hover:border-gray-300'"
-        >
-          <input
-            type="radio"
-            :value="address.id"
-            v-model="selectedAddress"
-            class="mt-1 text-[#0c831f] focus:ring-[#0c831f]"
-          />
-          <div>
-            <p class="text-sm font-medium text-gray-900">{{ address.label }}</p>
-            <p class="text-sm text-gray-600">{{ address.fullAddress }}</p>
-            <p v-if="address.landmark" class="text-xs text-gray-400">Landmark: {{ address.landmark }}</p>
-          </div>
-        </label>
-      </div>
-    </section>
-
-    <!-- Delivery Slot -->
-    <section class="card">
-      <h2 class="text-base font-bold text-gray-900 mb-4">Delivery Slot</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        <button
-          v-for="slot in deliverySlots"
-          :key="slot.id"
-          class="p-3 rounded-lg border text-center transition-colors"
-          :class="selectedSlot === slot.id ? 'border-[#0c831f] bg-green-50' : 'border-gray-200 hover:border-gray-300'"
-          @click="selectedSlot = slot.id"
-        >
-          <p class="text-sm font-medium text-gray-900">{{ slot.label }}</p>
-          <p class="text-xs text-gray-500">{{ slot.time }}</p>
-        </button>
-      </div>
-    </section>
-
-    <!-- Order Summary -->
-    <section class="card">
-      <h2 class="text-base font-bold text-gray-900 mb-4">Order Summary</h2>
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between">
-          <span class="text-gray-600">Items ({{ count }})</span>
-          <span class="font-medium">{{ formatPrice(subtotal) }}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Delivery Fee</span>
-          <span :class="deliveryFee === 0 ? 'text-green-600 font-medium' : 'font-medium'">
-            {{ deliveryFee === 0 ? 'FREE' : formatPrice(deliveryFee) }}
-          </span>
-        </div>
-        <hr />
-        <div class="flex justify-between text-base font-bold">
-          <span>Total</span>
-          <span>{{ formatPrice(total) }}</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Continue Button -->
-    <button
-      class="btn-primary w-full py-3 text-base"
-      :disabled="!selectedAddress || !selectedSlot"
-      @click="navigateTo('/checkout/payment')"
-    >
-      Continue to Payment
-    </button>
-
-    <!-- Add Address Modal -->
-    <Modal v-model="showAddAddress">
-      <template #title>Add New Address</template>
-      <div class="space-y-3">
-        <input v-model="newAddress.label" type="text" placeholder="Label (Home, Office...)" class="input-field" />
-        <textarea v-model="newAddress.fullAddress" placeholder="Full address" class="input-field" rows="3"></textarea>
-        <input v-model="newAddress.landmark" type="text" placeholder="Landmark (optional)" class="input-field" />
-        <input v-model="newAddress.pincode" type="text" placeholder="Pincode" class="input-field" maxlength="6" />
-      </div>
-      <template #footer>
-        <div class="flex gap-3">
-          <button class="btn-secondary flex-1" @click="showAddAddress = false">Cancel</button>
-          <button class="btn-primary flex-1" @click="addAddress">Save Address</button>
-        </div>
-      </template>
-    </Modal>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { formatPrice } from '~/utils/formatters'
 
@@ -157,3 +56,122 @@ function addAddress() {
   newAddress.value = { label: '', fullAddress: '', landmark: '', pincode: '' }
 }
 </script>
+
+<template>
+  <div class="space-y-6">
+    <h1 class="text-xl font-bold text-gray-900">
+      Checkout
+    </h1>
+
+    <!-- Address Selection -->
+    <section class="card">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-base font-bold text-gray-900">
+          Delivery Address
+        </h2>
+        <button class="text-sm text-[#0c831f] font-medium hover:underline" @click="showAddAddress = true">
+          + Add New
+        </button>
+      </div>
+      <div class="space-y-3">
+        <label
+          v-for="address in addresses"
+          :key="address.id"
+          class="flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors"
+          :class="selectedAddress === address.id ? 'border-[#0c831f] bg-green-50' : 'border-gray-200 hover:border-gray-300'"
+        >
+          <input
+            v-model="selectedAddress"
+            type="radio"
+            :value="address.id"
+            class="mt-1 text-[#0c831f] focus:ring-[#0c831f]"
+          >
+          <div>
+            <p class="text-sm font-medium text-gray-900">{{ address.label }}</p>
+            <p class="text-sm text-gray-600">{{ address.fullAddress }}</p>
+            <p v-if="address.landmark" class="text-xs text-gray-400">Landmark: {{ address.landmark }}</p>
+          </div>
+        </label>
+      </div>
+    </section>
+
+    <!-- Delivery Slot -->
+    <section class="card">
+      <h2 class="text-base font-bold text-gray-900 mb-4">
+        Delivery Slot
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <button
+          v-for="slot in deliverySlots"
+          :key="slot.id"
+          class="p-3 rounded-lg border text-center transition-colors"
+          :class="selectedSlot === slot.id ? 'border-[#0c831f] bg-green-50' : 'border-gray-200 hover:border-gray-300'"
+          @click="selectedSlot = slot.id"
+        >
+          <p class="text-sm font-medium text-gray-900">
+            {{ slot.label }}
+          </p>
+          <p class="text-xs text-gray-500">
+            {{ slot.time }}
+          </p>
+        </button>
+      </div>
+    </section>
+
+    <!-- Order Summary -->
+    <section class="card">
+      <h2 class="text-base font-bold text-gray-900 mb-4">
+        Order Summary
+      </h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="text-gray-600">Items ({{ count }})</span>
+          <span class="font-medium">{{ formatPrice(subtotal) }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Delivery Fee</span>
+          <span :class="deliveryFee === 0 ? 'text-green-600 font-medium' : 'font-medium'">
+            {{ deliveryFee === 0 ? 'FREE' : formatPrice(deliveryFee) }}
+          </span>
+        </div>
+        <hr>
+        <div class="flex justify-between text-base font-bold">
+          <span>Total</span>
+          <span>{{ formatPrice(total) }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Continue Button -->
+    <button
+      class="btn-primary w-full py-3 text-base"
+      :disabled="!selectedAddress || !selectedSlot"
+      @click="navigateTo('/checkout/payment')"
+    >
+      Continue to Payment
+    </button>
+
+    <!-- Add Address Modal -->
+    <Modal v-model="showAddAddress">
+      <template #title>
+        Add New Address
+      </template>
+      <div class="space-y-3">
+        <input v-model="newAddress.label" type="text" placeholder="Label (Home, Office...)" class="input-field">
+        <textarea v-model="newAddress.fullAddress" placeholder="Full address" class="input-field" rows="3" />
+        <input v-model="newAddress.landmark" type="text" placeholder="Landmark (optional)" class="input-field">
+        <input v-model="newAddress.pincode" type="text" placeholder="Pincode" class="input-field" maxlength="6">
+      </div>
+      <template #footer>
+        <div class="flex gap-3">
+          <button class="btn-secondary flex-1" @click="showAddAddress = false">
+            Cancel
+          </button>
+          <button class="btn-primary flex-1" @click="addAddress">
+            Save Address
+          </button>
+        </div>
+      </template>
+    </Modal>
+  </div>
+</template>

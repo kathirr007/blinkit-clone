@@ -1,3 +1,19 @@
+<script setup lang="ts">
+const route = useRoute()
+
+const navItems = [
+  { path: '/', icon: 'mdi:home', label: 'Home' },
+  { path: '/category', icon: 'mdi:view-grid', label: 'Categories' },
+  { path: '/orders', icon: 'mdi:receipt', label: 'Orders' },
+  { path: '/account', icon: 'mdi:account', label: 'Account' },
+]
+
+function isActive(path: string): boolean {
+  if (path === '/') return route.path === '/'
+  return route.path.startsWith(path)
+}
+</script>
+
 <template>
   <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 lg:hidden z-50">
     <div class="flex items-center justify-around py-2">
@@ -14,19 +30,3 @@
     </div>
   </nav>
 </template>
-
-<script setup lang="ts">
-const route = useRoute()
-
-const navItems = [
-  { path: '/', icon: 'mdi:home', label: 'Home' },
-  { path: '/category', icon: 'mdi:view-grid', label: 'Categories' },
-  { path: '/orders', icon: 'mdi:receipt', label: 'Orders' },
-  { path: '/account', icon: 'mdi:account', label: 'Account' },
-]
-
-function isActive(path: string): boolean {
-  if (path === '/') return route.path === '/'
-  return route.path.startsWith(path)
-}
-</script>

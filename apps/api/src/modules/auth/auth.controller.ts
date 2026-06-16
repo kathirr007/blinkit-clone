@@ -6,17 +6,17 @@ import {
   HttpStatus,
   Patch,
   Post,
-} from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { Public } from '../../common/decorators/public.decorator';
-import { CurrentUser } from '../../common/decorators/current-user.decorator';
+} from '@nestjs/common'
+import { CurrentUser } from '../../common/decorators/current-user.decorator'
+import { Public } from '../../common/decorators/public.decorator'
+import { AuthService } from './auth.service'
 import {
-  SendOtpDto,
-  VerifyOtpDto,
   LoginDto,
   RefreshTokenDto,
+  SendOtpDto,
   UpdateProfileDto,
-} from './dto';
+  VerifyOtpDto,
+} from './dto'
 
 @Controller('auth')
 export class AuthController {
@@ -26,28 +26,28 @@ export class AuthController {
   @Post('send-otp')
   @HttpCode(HttpStatus.OK)
   async sendOtp(@Body() dto: SendOtpDto) {
-    return this.authService.sendOtp(dto.phone);
+    return this.authService.sendOtp(dto.phone)
   }
 
   @Public()
   @Post('verify-otp')
   @HttpCode(HttpStatus.OK)
   async verifyOtp(@Body() dto: VerifyOtpDto) {
-    return this.authService.verifyOtp(dto.phone, dto.code);
+    return this.authService.verifyOtp(dto.phone, dto.code)
   }
 
   @Public()
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Body() dto: LoginDto) {
-    return this.authService.login(dto.phone, dto.password);
+    return this.authService.login(dto.phone, dto.password)
   }
 
   @Public()
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   async refresh(@Body() dto: RefreshTokenDto) {
-    return this.authService.refreshTokens(dto.refreshToken);
+    return this.authService.refreshTokens(dto.refreshToken)
   }
 
   @Post('logout')
@@ -56,12 +56,12 @@ export class AuthController {
     @CurrentUser('sub') userId: string,
     @Body() dto: RefreshTokenDto,
   ) {
-    return this.authService.logout(userId, dto.refreshToken);
+    return this.authService.logout(userId, dto.refreshToken)
   }
 
   @Get('me')
   async getProfile(@CurrentUser('sub') userId: string) {
-    return this.authService.getProfile(userId);
+    return this.authService.getProfile(userId)
   }
 
   @Patch('profile')
@@ -69,6 +69,6 @@ export class AuthController {
     @CurrentUser('sub') userId: string,
     @Body() dto: UpdateProfileDto,
   ) {
-    return this.authService.updateProfile(userId, dto);
+    return this.authService.updateProfile(userId, dto)
   }
 }

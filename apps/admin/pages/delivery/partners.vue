@@ -42,8 +42,12 @@ function togglePartnerStatus(partner: any) {
     <!-- Page Header -->
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900">Delivery Partners</h1>
-        <p class="text-sm text-gray-500 mt-1">Manage delivery personnel</p>
+        <h1 class="text-2xl font-bold text-gray-900">
+          Delivery Partners
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">
+          Manage delivery personnel
+        </p>
       </div>
       <button class="btn-primary flex items-center gap-2" @click="showAddModal = true">
         <Icon name="heroicons:plus" class="w-5 h-5" />
@@ -59,8 +63,12 @@ function togglePartnerStatus(partner: any) {
             <Icon name="heroicons:user-group" class="w-5 h-5 text-green-600" />
           </div>
           <div>
-            <p class="text-sm text-gray-500">Active Partners</p>
-            <p class="text-xl font-bold text-gray-900">{{ partners.filter(p => p.status === 'active').length }}</p>
+            <p class="text-sm text-gray-500">
+              Active Partners
+            </p>
+            <p class="text-xl font-bold text-gray-900">
+              {{ partners.filter(p => p.status === 'active').length }}
+            </p>
           </div>
         </div>
       </div>
@@ -70,8 +78,12 @@ function togglePartnerStatus(partner: any) {
             <Icon name="heroicons:truck" class="w-5 h-5 text-blue-600" />
           </div>
           <div>
-            <p class="text-sm text-gray-500">On Delivery</p>
-            <p class="text-xl font-bold text-gray-900">{{ partners.reduce((sum, p) => sum + p.activeOrders, 0) }}</p>
+            <p class="text-sm text-gray-500">
+              On Delivery
+            </p>
+            <p class="text-xl font-bold text-gray-900">
+              {{ partners.reduce((sum, p) => sum + p.activeOrders, 0) }}
+            </p>
           </div>
         </div>
       </div>
@@ -81,7 +93,9 @@ function togglePartnerStatus(partner: any) {
             <Icon name="heroicons:star" class="w-5 h-5 text-yellow-600" />
           </div>
           <div>
-            <p class="text-sm text-gray-500">Avg Rating</p>
+            <p class="text-sm text-gray-500">
+              Avg Rating
+            </p>
             <p class="text-xl font-bold text-gray-900">
               {{ (partners.reduce((sum, p) => sum + p.rating, 0) / partners.length).toFixed(1) }}
             </p>
@@ -96,14 +110,30 @@ function togglePartnerStatus(partner: any) {
         <table class="w-full">
           <thead class="bg-gray-50 border-b border-gray-200">
             <tr>
-              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Partner</th>
-              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Phone</th>
-              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Vehicle</th>
-              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Active Orders</th>
-              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Total Deliveries</th>
-              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Rating</th>
-              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Status</th>
-              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">Actions</th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                Partner
+              </th>
+              <th class="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">
+                Phone
+              </th>
+              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">
+                Vehicle
+              </th>
+              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">
+                Active Orders
+              </th>
+              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">
+                Total Deliveries
+              </th>
+              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">
+                Rating
+              </th>
+              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">
+                Status
+              </th>
+              <th class="px-4 py-3 text-center text-xs font-semibold text-gray-600 uppercase">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-100">
@@ -116,8 +146,12 @@ function togglePartnerStatus(partner: any) {
                   <span class="text-sm font-medium text-gray-900">{{ partner.name }}</span>
                 </div>
               </td>
-              <td class="px-4 py-3 text-sm text-gray-600">{{ partner.phone }}</td>
-              <td class="px-4 py-3 text-sm text-gray-600 text-center">{{ partner.vehicle }}</td>
+              <td class="px-4 py-3 text-sm text-gray-600">
+                {{ partner.phone }}
+              </td>
+              <td class="px-4 py-3 text-sm text-gray-600 text-center">
+                {{ partner.vehicle }}
+              </td>
               <td class="px-4 py-3 text-center">
                 <span
                   class="text-sm font-medium"
@@ -126,7 +160,9 @@ function togglePartnerStatus(partner: any) {
                   {{ partner.activeOrders }}
                 </span>
               </td>
-              <td class="px-4 py-3 text-sm text-gray-600 text-center">{{ partner.totalDeliveries }}</td>
+              <td class="px-4 py-3 text-sm text-gray-600 text-center">
+                {{ partner.totalDeliveries }}
+              </td>
               <td class="px-4 py-3 text-center">
                 <div class="flex items-center justify-center gap-1">
                   <Icon name="heroicons:star-solid" class="w-3.5 h-3.5 text-yellow-500" />
@@ -144,8 +180,8 @@ function togglePartnerStatus(partner: any) {
               <td class="px-4 py-3 text-center">
                 <button
                   class="p-1.5 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
-                  @click="togglePartnerStatus(partner)"
                   :title="partner.status === 'active' ? 'Deactivate' : 'Activate'"
+                  @click="togglePartnerStatus(partner)"
                 >
                   <Icon
                     :name="partner.status === 'active' ? 'heroicons:pause' : 'heroicons:play'"
@@ -162,33 +198,45 @@ function togglePartnerStatus(partner: any) {
     <!-- Add Partner Modal -->
     <Teleport to="body">
       <div v-if="showAddModal" class="fixed inset-0 z-50 flex items-center justify-center">
-        <div class="absolute inset-0 bg-black/50" @click="showAddModal = false"></div>
+        <div class="absolute inset-0 bg-black/50" @click="showAddModal = false" />
         <div class="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-4">Add Delivery Partner</h3>
-          <form @submit.prevent="addPartner" class="space-y-4">
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">
+            Add Delivery Partner
+          </h3>
+          <form class="space-y-4" @submit.prevent="addPartner">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-              <input v-model="newPartner.name" type="text" class="input-field" placeholder="Enter full name" required />
+              <input v-model="newPartner.name" type="text" class="input-field" placeholder="Enter full name" required>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
-              <input v-model="newPartner.phone" type="tel" class="input-field" placeholder="+91 98765 XXXXX" required />
+              <input v-model="newPartner.phone" type="tel" class="input-field" placeholder="+91 98765 XXXXX" required>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Email (Optional)</label>
-              <input v-model="newPartner.email" type="email" class="input-field" placeholder="email@example.com" />
+              <input v-model="newPartner.email" type="email" class="input-field" placeholder="email@example.com">
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Vehicle Type</label>
               <select v-model="newPartner.vehicle" class="input-field">
-                <option value="bike">Bike</option>
-                <option value="scooter">Scooter</option>
-                <option value="bicycle">Bicycle</option>
+                <option value="bike">
+                  Bike
+                </option>
+                <option value="scooter">
+                  Scooter
+                </option>
+                <option value="bicycle">
+                  Bicycle
+                </option>
               </select>
             </div>
             <div class="flex justify-end gap-3 pt-2">
-              <button type="button" class="btn-secondary" @click="showAddModal = false">Cancel</button>
-              <button type="submit" class="btn-primary">Add Partner</button>
+              <button type="button" class="btn-secondary" @click="showAddModal = false">
+                Cancel
+              </button>
+              <button type="submit" class="btn-primary">
+                Add Partner
+              </button>
             </div>
           </form>
         </div>

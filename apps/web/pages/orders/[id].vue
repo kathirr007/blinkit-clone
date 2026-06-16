@@ -1,98 +1,5 @@
-<template>
-  <div class="max-w-4xl mx-auto px-4 py-4">
-    <!-- Header -->
-    <div class="flex items-center gap-3 mb-6">
-      <button @click="$router.back()" class="p-2 hover:bg-gray-100 rounded-full">
-        <Icon name="mdi:arrow-left" class="w-5 h-5" />
-      </button>
-      <div>
-        <h1 class="text-xl font-bold text-gray-900">Order {{ formatOrderNumber(order.orderNumber) }}</h1>
-        <p class="text-sm text-gray-500">Placed on {{ formatDate(order.createdAt) }}</p>
-      </div>
-    </div>
-
-    <!-- Status Timeline -->
-    <section class="card mb-4">
-      <h2 class="text-base font-bold text-gray-900 mb-4">Order Status</h2>
-      <div class="relative">
-        <div class="space-y-4">
-          <div
-            v-for="(step, idx) in statusTimeline"
-            :key="step.key"
-            class="flex items-start gap-3"
-          >
-            <div class="flex flex-col items-center">
-              <div
-                class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
-                :class="step.completed ? 'bg-[#0c831f] text-white' : 'bg-gray-200 text-gray-400'"
-              >
-                <Icon :name="step.icon" class="w-4 h-4" />
-              </div>
-              <div v-if="idx < statusTimeline.length - 1" class="w-0.5 h-6 mt-1" :class="step.completed ? 'bg-[#0c831f]' : 'bg-gray-200'" />
-            </div>
-            <div class="pt-1">
-              <p class="text-sm font-medium" :class="step.completed ? 'text-gray-900' : 'text-gray-400'">{{ step.label }}</p>
-              <p v-if="step.time" class="text-xs text-gray-500">{{ step.time }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Order Items -->
-    <section class="card mb-4">
-      <h2 class="text-base font-bold text-gray-900 mb-4">Items</h2>
-      <div class="space-y-3">
-        <div v-for="item in order.items" :key="item.productId" class="flex items-center gap-3">
-          <img :src="item.image" :alt="item.name" class="w-12 h-12 rounded object-contain bg-gray-50" />
-          <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium text-gray-900 truncate">{{ item.name }}</p>
-            <p class="text-xs text-gray-500">{{ item.unit }} x {{ item.quantity }}</p>
-          </div>
-          <span class="text-sm font-medium text-gray-900">{{ formatPrice(item.price * item.quantity) }}</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Payment Info -->
-    <section class="card mb-4">
-      <h2 class="text-base font-bold text-gray-900 mb-4">Payment Details</h2>
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between">
-          <span class="text-gray-600">Payment Method</span>
-          <span class="font-medium">{{ order.paymentMethod }}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Subtotal</span>
-          <span>{{ formatPrice(order.subtotal) }}</span>
-        </div>
-        <div class="flex justify-between">
-          <span class="text-gray-600">Delivery Fee</span>
-          <span :class="order.deliveryFee === 0 ? 'text-green-600' : ''">
-            {{ order.deliveryFee === 0 ? 'FREE' : formatPrice(order.deliveryFee) }}
-          </span>
-        </div>
-        <hr />
-        <div class="flex justify-between font-bold">
-          <span>Total</span>
-          <span>{{ formatPrice(order.total) }}</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Delivery Info -->
-    <section class="card">
-      <h2 class="text-base font-bold text-gray-900 mb-4">Delivery Address</h2>
-      <div>
-        <p class="text-sm font-medium text-gray-900">{{ order.deliveryAddress.label }}</p>
-        <p class="text-sm text-gray-600">{{ order.deliveryAddress.fullAddress }}</p>
-      </div>
-    </section>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { formatPrice, formatDate, formatOrderNumber } from '~/utils/formatters'
+import { formatDate, formatOrderNumber, formatPrice } from '~/utils/formatters'
 
 definePageMeta({
   middleware: ['auth'],
@@ -138,3 +45,120 @@ const statusTimeline = computed(() => {
   }))
 })
 </script>
+
+<template>
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <!-- Header -->
+    <div class="flex items-center gap-3 mb-6">
+      <button class="p-2 hover:bg-gray-100 rounded-full" @click="$router.back()">
+        <Icon name="mdi:arrow-left" class="w-5 h-5" />
+      </button>
+      <div>
+        <h1 class="text-xl font-bold text-gray-900">
+          Order {{ formatOrderNumber(order.orderNumber) }}
+        </h1>
+        <p class="text-sm text-gray-500">
+          Placed on {{ formatDate(order.createdAt) }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Status Timeline -->
+    <section class="card mb-4">
+      <h2 class="text-base font-bold text-gray-900 mb-4">
+        Order Status
+      </h2>
+      <div class="relative">
+        <div class="space-y-4">
+          <div
+            v-for="(step, idx) in statusTimeline"
+            :key="step.key"
+            class="flex items-start gap-3"
+          >
+            <div class="flex flex-col items-center">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0"
+                :class="step.completed ? 'bg-[#0c831f] text-white' : 'bg-gray-200 text-gray-400'"
+              >
+                <Icon :name="step.icon" class="w-4 h-4" />
+              </div>
+              <div v-if="idx < statusTimeline.length - 1" class="w-0.5 h-6 mt-1" :class="step.completed ? 'bg-[#0c831f]' : 'bg-gray-200'" />
+            </div>
+            <div class="pt-1">
+              <p class="text-sm font-medium" :class="step.completed ? 'text-gray-900' : 'text-gray-400'">
+                {{ step.label }}
+              </p>
+              <p v-if="step.time" class="text-xs text-gray-500">
+                {{ step.time }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Order Items -->
+    <section class="card mb-4">
+      <h2 class="text-base font-bold text-gray-900 mb-4">
+        Items
+      </h2>
+      <div class="space-y-3">
+        <div v-for="item in order.items" :key="item.productId" class="flex items-center gap-3">
+          <img :src="item.image" :alt="item.name" class="w-12 h-12 rounded object-contain bg-gray-50">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 truncate">
+              {{ item.name }}
+            </p>
+            <p class="text-xs text-gray-500">
+              {{ item.unit }} x {{ item.quantity }}
+            </p>
+          </div>
+          <span class="text-sm font-medium text-gray-900">{{ formatPrice(item.price * item.quantity) }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Payment Info -->
+    <section class="card mb-4">
+      <h2 class="text-base font-bold text-gray-900 mb-4">
+        Payment Details
+      </h2>
+      <div class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="text-gray-600">Payment Method</span>
+          <span class="font-medium">{{ order.paymentMethod }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Subtotal</span>
+          <span>{{ formatPrice(order.subtotal) }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-gray-600">Delivery Fee</span>
+          <span :class="order.deliveryFee === 0 ? 'text-green-600' : ''">
+            {{ order.deliveryFee === 0 ? 'FREE' : formatPrice(order.deliveryFee) }}
+          </span>
+        </div>
+        <hr>
+        <div class="flex justify-between font-bold">
+          <span>Total</span>
+          <span>{{ formatPrice(order.total) }}</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Delivery Info -->
+    <section class="card">
+      <h2 class="text-base font-bold text-gray-900 mb-4">
+        Delivery Address
+      </h2>
+      <div>
+        <p class="text-sm font-medium text-gray-900">
+          {{ order.deliveryAddress.label }}
+        </p>
+        <p class="text-sm text-gray-600">
+          {{ order.deliveryAddress.fullAddress }}
+        </p>
+      </div>
+    </section>
+  </div>
+</template>

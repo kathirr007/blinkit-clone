@@ -16,8 +16,12 @@ const stats = ref({
   <div class="space-y-6">
     <!-- Page Header -->
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Dashboard</h1>
-      <p class="text-sm text-gray-500 mt-1">Overview of your store performance</p>
+      <h1 class="text-2xl font-bold text-gray-900">
+        Dashboard
+      </h1>
+      <p class="text-sm text-gray-500 mt-1">
+        Overview of your store performance
+      </p>
     </div>
 
     <!-- Stats Cards -->

@@ -1,6 +1,6 @@
-import { Controller, Get, Patch, Param, Query } from '@nestjs/common'
-import { NotificationsService } from './notifications.service'
+import { Controller, Get, Param, Patch, Query } from '@nestjs/common'
 import { CurrentUser } from '../../common/decorators/current-user.decorator'
+import { NotificationsService } from './notifications.service'
 
 @Controller('notifications')
 export class NotificationsController {
@@ -14,8 +14,8 @@ export class NotificationsController {
   ) {
     return this.notificationsService.findAll(
       userId,
-      page ? parseInt(page) : 1,
-      limit ? parseInt(limit) : 20,
+      page ? Number.parseInt(page) : 1,
+      limit ? Number.parseInt(limit) : 20,
     )
   }
 

@@ -1,4 +1,4 @@
-import { OrderStatus } from '../types/order';
+import { OrderStatus } from '../types/order'
 
 export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
   [OrderStatus.PENDING]: 'Order Placed',
@@ -9,7 +9,7 @@ export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
   [OrderStatus.DELIVERED]: 'Delivered',
   [OrderStatus.CANCELLED]: 'Cancelled',
   [OrderStatus.REFUNDED]: 'Refunded',
-};
+}
 
 export const ORDER_STATUS_FLOW: OrderStatus[][] = [
   [OrderStatus.PENDING, OrderStatus.CONFIRMED],
@@ -20,4 +20,4 @@ export const ORDER_STATUS_FLOW: OrderStatus[][] = [
   [OrderStatus.PENDING, OrderStatus.CANCELLED],
   [OrderStatus.CONFIRMED, OrderStatus.CANCELLED],
   [OrderStatus.DELIVERED, OrderStatus.REFUNDED],
-];
+]

@@ -27,7 +27,9 @@ function formatStatus(status: string): string {
 <template>
   <div class="card">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-lg font-semibold text-gray-900">Recent Orders</h3>
+      <h3 class="text-lg font-semibold text-gray-900">
+        Recent Orders
+      </h3>
       <NuxtLink to="/orders" class="text-sm text-primary-600 hover:text-primary-700 font-medium">
         View All
       </NuxtLink>
@@ -37,19 +39,37 @@ function formatStatus(status: string): string {
       <table class="w-full">
         <thead class="bg-gray-50">
           <tr>
-            <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Order</th>
-            <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Customer</th>
-            <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">Items</th>
-            <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">Total</th>
-            <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">Status</th>
-            <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">Date</th>
+            <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">
+              Order
+            </th>
+            <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">
+              Customer
+            </th>
+            <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">
+              Items
+            </th>
+            <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">
+              Total
+            </th>
+            <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">
+              Status
+            </th>
+            <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">
+              Date
+            </th>
           </tr>
         </thead>
         <tbody class="divide-y divide-gray-100">
           <tr v-for="order in recentOrders" :key="order.id" class="hover:bg-gray-50">
-            <td class="px-4 py-3 text-sm font-medium text-primary-600">{{ order.id }}</td>
-            <td class="px-4 py-3 text-sm text-gray-900">{{ order.customer }}</td>
-            <td class="px-4 py-3 text-sm text-gray-600 text-center">{{ order.items }}</td>
+            <td class="px-4 py-3 text-sm font-medium text-primary-600">
+              {{ order.id }}
+            </td>
+            <td class="px-4 py-3 text-sm text-gray-900">
+              {{ order.customer }}
+            </td>
+            <td class="px-4 py-3 text-sm text-gray-600 text-center">
+              {{ order.items }}
+            </td>
             <td class="px-4 py-3 text-sm font-medium text-gray-900 text-right">
               &#8377;{{ order.total }}
             </td>
@@ -58,7 +78,9 @@ function formatStatus(status: string): string {
                 {{ formatStatus(order.status) }}
               </span>
             </td>
-            <td class="px-4 py-3 text-sm text-gray-500 text-right">{{ order.date }}</td>
+            <td class="px-4 py-3 text-sm text-gray-500 text-right">
+              {{ order.date }}
+            </td>
           </tr>
         </tbody>
       </table>

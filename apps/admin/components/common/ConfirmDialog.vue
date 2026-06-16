@@ -32,7 +32,7 @@ const emit = defineEmits<{
       <div
         class="absolute inset-0 bg-black/50"
         @click="emit('cancel')"
-      ></div>
+      />
 
       <!-- Dialog -->
       <div class="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
@@ -56,11 +56,15 @@ const emit = defineEmits<{
               }"
             />
           </div>
-          <h3 class="text-lg font-semibold text-gray-900">{{ title }}</h3>
+          <h3 class="text-lg font-semibold text-gray-900">
+            {{ title }}
+          </h3>
         </div>
 
         <!-- Message -->
-        <p class="text-sm text-gray-600 mb-6 ml-11">{{ message }}</p>
+        <p class="text-sm text-gray-600 mb-6 ml-11">
+          {{ message }}
+        </p>
 
         <!-- Actions -->
         <div class="flex items-center justify-end gap-3">

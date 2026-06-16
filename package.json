@@ -1,26 +1,36 @@
 {
   "name": "blinkit-clone",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
   "scripts": {
     "dev": "pnpm -r --parallel dev",
     "dev:api": "pnpm --filter @blinkit/api dev",
     "dev:web": "pnpm --filter @blinkit/web dev",
     "dev:admin": "pnpm --filter @blinkit/admin dev",
     "build": "pnpm -r build",
-    "lint": "pnpm -r lint",
-    "format": "prettier --write \"**/*.{ts,vue,json,md}\"",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "db:migrate": "pnpm --filter @blinkit/api prisma migrate dev",
     "db:seed": "pnpm --filter @blinkit/api prisma db seed",
     "db:studio": "pnpm --filter @blinkit/api prisma studio",
     "docker:up": "docker compose -f docker/docker-compose.dev.yml up -d",
-    "docker:down": "docker compose -f docker/docker-compose.dev.yml down"
+    "docker:down": "docker compose -f docker/docker-compose.dev.yml down",
+    "prepare": "simple-git-hooks"
   },
   "devDependencies": {
-    "prettier": "^3.3.0",
+    "@antfu/eslint-config": "^9.0.0",
+    "eslint": "^10.5.0",
+    "lint-staged": "^17.0.7",
+    "simple-git-hooks": "^2.13.1",
     "typescript": "^5.5.0"
   },
-  "engines": {
-    "node": ">=20.0.0",
-    "pnpm": ">=9.0.0"
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,vue}": "eslint --fix"
   }
 }

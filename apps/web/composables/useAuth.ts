@@ -14,7 +14,7 @@ export function useAuth() {
     return await authStore.verifyOtp(phone, otp)
   }
 
-  async function signup(data: { name: string; phone: string; email?: string }) {
+  async function signup(data: { name: string, phone: string, email?: string }) {
     return await authStore.signup(data)
   }
 

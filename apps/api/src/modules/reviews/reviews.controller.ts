@@ -1,17 +1,17 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
   Body,
+  Controller,
+  Delete,
+  Get,
   Param,
+  Patch,
+  Post,
   Query,
 } from '@nestjs/common'
-import { ReviewsService } from './reviews.service'
-import { CreateReviewDto } from './dto/create-review.dto'
 import { CurrentUser } from '../../common/decorators/current-user.decorator'
 import { Public } from '../../common/decorators/public.decorator'
+import { CreateReviewDto } from './dto/create-review.dto'
+import { ReviewsService } from './reviews.service'
 
 @Controller('products/:productId/reviews')
 export class ReviewsController {
@@ -26,8 +26,8 @@ export class ReviewsController {
   ) {
     return this.reviewsService.findByProduct(
       productId,
-      page ? parseInt(page) : 1,
-      limit ? parseInt(limit) : 10,
+      page ? Number.parseInt(page) : 1,
+      limit ? Number.parseInt(limit) : 10,
     )
   }
 

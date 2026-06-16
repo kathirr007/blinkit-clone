@@ -22,12 +22,15 @@ async function handleLogin() {
     const result = await authStore.login(form.email, form.password)
     if (result.success) {
       router.push('/')
-    } else {
+    }
+    else {
       error.value = result.error || 'Login failed'
     }
-  } catch (e: any) {
+  }
+  catch (e: any) {
     error.value = e.message || 'An unexpected error occurred'
-  } finally {
+  }
+  finally {
     loading.value = false
   }
 }
@@ -40,17 +43,23 @@ async function handleLogin() {
       <div class="inline-flex items-center justify-center w-16 h-16 bg-primary-600 rounded-2xl mb-4">
         <span class="text-white text-2xl font-bold">B</span>
       </div>
-      <h1 class="text-2xl font-bold text-gray-900">Blinkit Admin</h1>
-      <p class="text-sm text-gray-500 mt-1">Sign in to manage your store</p>
+      <h1 class="text-2xl font-bold text-gray-900">
+        Blinkit Admin
+      </h1>
+      <p class="text-sm text-gray-500 mt-1">
+        Sign in to manage your store
+      </p>
     </div>
 
     <!-- Login Form -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-      <form @submit.prevent="handleLogin" class="space-y-5">
+      <form class="space-y-5" @submit.prevent="handleLogin">
         <!-- Error Alert -->
         <div v-if="error" class="bg-red-50 border border-red-200 rounded-lg p-3 flex items-center gap-2">
           <Icon name="heroicons:exclamation-circle" class="w-5 h-5 text-red-600 flex-shrink-0" />
-          <p class="text-sm text-red-700">{{ error }}</p>
+          <p class="text-sm text-red-700">
+            {{ error }}
+          </p>
         </div>
 
         <!-- Email -->
@@ -65,7 +74,7 @@ async function handleLogin() {
             placeholder="admin@blinkit.com"
             class="input-field"
             required
-          />
+          >
         </div>
 
         <!-- Password -->
@@ -80,7 +89,7 @@ async function handleLogin() {
             placeholder="Enter your password"
             class="input-field"
             required
-          />
+          >
         </div>
 
         <!-- Submit -->
@@ -89,7 +98,7 @@ async function handleLogin() {
           class="btn-primary w-full flex items-center justify-center gap-2"
           :disabled="loading"
         >
-          <div v-if="loading" class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+          <div v-if="loading" class="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
           <span>{{ loading ? 'Signing in...' : 'Sign In' }}</span>
         </button>
       </form>

@@ -103,7 +103,8 @@ function handleSave() {
   if (editingCategory.value) {
     // TODO: API call to update category
     console.log('Updating category:', editingCategory.value.id, modalForm)
-  } else {
+  }
+  else {
     // TODO: API call to create category
     console.log('Creating category:', modalForm)
   }
@@ -120,7 +121,8 @@ const expandedCategories = ref<Set<string>>(new Set(['1', '2', '3', '4', '5']))
 function toggleExpand(id: string) {
   if (expandedCategories.value.has(id)) {
     expandedCategories.value.delete(id)
-  } else {
+  }
+  else {
     expandedCategories.value.add(id)
   }
 }
@@ -131,8 +133,12 @@ function toggleExpand(id: string) {
     <!-- Page Header -->
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900">Categories</h1>
-        <p class="text-sm text-gray-500 mt-1">Manage product categories</p>
+        <h1 class="text-2xl font-bold text-gray-900">
+          Categories
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">
+          Manage product categories
+        </p>
       </div>
       <button class="btn-primary flex items-center gap-2" @click="openCreateModal()">
         <Icon name="heroicons:plus" class="w-5 h-5" />
@@ -167,22 +173,22 @@ function toggleExpand(id: string) {
             <div class="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
               <button
                 class="p-1.5 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
-                @click="openCreateModal(category.id)"
                 title="Add subcategory"
+                @click="openCreateModal(category.id)"
               >
                 <Icon name="heroicons:plus" class="w-4 h-4" />
               </button>
               <button
                 class="p-1.5 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg"
-                @click="openEditModal(category)"
                 title="Edit"
+                @click="openEditModal(category)"
               >
                 <Icon name="heroicons:pencil-square" class="w-4 h-4" />
               </button>
               <button
                 class="p-1.5 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg"
-                @click="deleteCategory(category)"
                 title="Delete"
+                @click="deleteCategory(category)"
               >
                 <Icon name="heroicons:trash" class="w-4 h-4" />
               </button>
@@ -229,29 +235,35 @@ function toggleExpand(id: string) {
     <!-- Create/Edit Modal -->
     <Teleport to="body">
       <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center">
-        <div class="absolute inset-0 bg-black/50" @click="showModal = false"></div>
+        <div class="absolute inset-0 bg-black/50" @click="showModal = false" />
         <div class="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
           <h3 class="text-lg font-semibold text-gray-900 mb-4">
             {{ editingCategory ? 'Edit Category' : 'Create Category' }}
           </h3>
-          <form @submit.prevent="handleSave" class="space-y-4">
+          <form class="space-y-4" @submit.prevent="handleSave">
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Category Name</label>
-              <input v-model="modalForm.name" type="text" class="input-field" placeholder="e.g. Dairy & Breakfast" required />
+              <input v-model="modalForm.name" type="text" class="input-field" placeholder="e.g. Dairy & Breakfast" required>
             </div>
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-              <input v-model="modalForm.slug" type="text" class="input-field" placeholder="e.g. dairy-breakfast" />
+              <input v-model="modalForm.slug" type="text" class="input-field" placeholder="e.g. dairy-breakfast">
             </div>
             <div v-if="!editingCategory">
               <label class="block text-sm font-medium text-gray-700 mb-1">Parent Category</label>
               <select v-model="modalForm.parent" class="input-field">
-                <option value="">None (Top Level)</option>
-                <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.name }}</option>
+                <option value="">
+                  None (Top Level)
+                </option>
+                <option v-for="cat in categories" :key="cat.id" :value="cat.id">
+                  {{ cat.name }}
+                </option>
               </select>
             </div>
             <div class="flex justify-end gap-3 pt-2">
-              <button type="button" class="btn-secondary" @click="showModal = false">Cancel</button>
+              <button type="button" class="btn-secondary" @click="showModal = false">
+                Cancel
+              </button>
               <button type="submit" class="btn-primary">
                 {{ editingCategory ? 'Update' : 'Create' }}
               </button>

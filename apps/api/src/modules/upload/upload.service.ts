@@ -1,12 +1,12 @@
+import { randomUUID } from 'node:crypto'
+import { extname } from 'node:path'
+import {
+  DeleteObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3'
 import { Injectable } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
-import {
-  S3Client,
-  PutObjectCommand,
-  DeleteObjectCommand,
-} from '@aws-sdk/client-s3'
-import { randomUUID } from 'crypto'
-import { extname } from 'path'
 
 @Injectable()
 export class UploadService {
@@ -46,7 +46,7 @@ export class UploadService {
   }
 
   async uploadMultiple(files: Express.Multer.File[], folder = 'images'): Promise<string[]> {
-    return Promise.all(files.map((file) => this.uploadFile(file, folder)))
+    return Promise.all(files.map(file => this.uploadFile(file, folder)))
   }
 
   async deleteFile(url: string): Promise<void> {

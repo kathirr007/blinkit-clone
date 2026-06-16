@@ -5,19 +5,19 @@ export enum UserRole {
 }
 
 export interface IUser {
-  id: string;
-  phone: string;
-  email?: string;
-  name?: string;
-  role: UserRole;
-  isVerified: boolean;
-  avatarUrl?: string;
-  createdAt: string;
-  updatedAt: string;
+  id: string
+  phone: string
+  email?: string
+  name?: string
+  role: UserRole
+  isVerified: boolean
+  avatarUrl?: string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface ILoginResponse {
-  user: IUser;
-  accessToken: string;
-  refreshToken: string;
+  user: IUser
+  accessToken: string
+  refreshToken: string
 }

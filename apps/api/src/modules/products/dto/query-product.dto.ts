@@ -1,37 +1,37 @@
-import { IsOptional, IsString, IsNumber, IsIn, Min } from 'class-validator';
-import { Transform, Type } from 'class-transformer';
-import { PaginationDto } from '../../../common/dto/pagination.dto';
+import { Transform, Type } from 'class-transformer'
+import { IsIn, IsNumber, IsOptional, IsString, Min } from 'class-validator'
+import { PaginationDto } from '../../../common/dto/pagination.dto'
 
 export class QueryProductDto extends PaginationDto {
   @IsOptional()
   @IsString()
-  category?: string;
+  category?: string
 
   @IsOptional()
   @IsString()
-  brand?: string;
+  brand?: string
 
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
   @Min(0)
-  minPrice?: number;
+  minPrice?: number
 
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
   @Min(0)
-  maxPrice?: number;
+  maxPrice?: number
 
   @IsOptional()
   @IsString()
-  search?: string;
+  search?: string
 
   @IsOptional()
   @IsIn(['price_asc', 'price_desc', 'newest', 'popular'])
-  sort?: 'price_asc' | 'price_desc' | 'newest' | 'popular';
+  sort?: 'price_asc' | 'price_desc' | 'newest' | 'popular'
 
   @IsOptional()
   @Transform(({ value }) => value === 'true' || value === true)
-  isFeatured?: boolean;
+  isFeatured?: boolean
 }

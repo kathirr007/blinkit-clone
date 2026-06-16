@@ -22,8 +22,8 @@ export const useCartStore = defineStore('cart', {
   }),
 
   getters: {
-    count: (state) => state.items.reduce((sum, item) => sum + item.quantity, 0),
-    subtotal: (state) => state.items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    count: state => state.items.reduce((sum, item) => sum + item.quantity, 0),
+    subtotal: state => state.items.reduce((sum, item) => sum + item.price * item.quantity, 0),
     deliveryFee: (state) => {
       const subtotal = state.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
       // Free delivery above ₹199
@@ -32,7 +32,7 @@ export const useCartStore = defineStore('cart', {
     total(): number {
       return this.subtotal + this.deliveryFee
     },
-    isEmpty: (state) => state.items.length === 0,
+    isEmpty: state => state.items.length === 0,
   },
 
   actions: {
@@ -43,20 +43,23 @@ export const useCartStore = defineStore('cart', {
         // const { $api } = useNuxtApp()
         // const response = await $api('/cart')
         // this.items = response.data.items
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Failed to fetch cart', error)
-      } finally {
+      }
+      finally {
         this.loading = false
       }
     },
 
     addItem(product: CartItem) {
-      const existingIndex = this.items.findIndex((item) => item.productId === product.productId)
+      const existingIndex = this.items.findIndex(item => item.productId === product.productId)
 
       if (existingIndex > -1) {
         // Optimistic update
         this.items[existingIndex].quantity += 1
-      } else {
+      }
+      else {
         this.items.push({ ...product, quantity: 1 })
       }
 
@@ -67,7 +70,7 @@ export const useCartStore = defineStore('cart', {
     },
 
     removeItem(productId: string) {
-      const index = this.items.findIndex((item) => item.productId === productId)
+      const index = this.items.findIndex(item => item.productId === productId)
       if (index > -1) {
         const removed = this.items.splice(index, 1)
         // TODO: Sync with API, rollback on error
@@ -78,7 +81,7 @@ export const useCartStore = defineStore('cart', {
     },
 
     updateQuantity(productId: string, quantity: number) {
-      const item = this.items.find((item) => item.productId === productId)
+      const item = this.items.find(item => item.productId === productId)
       if (item) {
         const previousQuantity = item.quantity
         if (quantity <= 0) {

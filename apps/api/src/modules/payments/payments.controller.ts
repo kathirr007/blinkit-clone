@@ -1,9 +1,9 @@
-import { Controller, Post, Get, Body, Param } from '@nestjs/common'
-import { PaymentsService } from './payments.service'
-import { CreatePaymentDto } from './dto/create-payment.dto'
-import { VerifyPaymentDto } from './dto/verify-payment.dto'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { CurrentUser } from '../../common/decorators/current-user.decorator'
 import { Public } from '../../common/decorators/public.decorator'
+import { CreatePaymentDto } from './dto/create-payment.dto'
+import { VerifyPaymentDto } from './dto/verify-payment.dto'
+import { PaymentsService } from './payments.service'
 
 @Controller('payments')
 export class PaymentsController {

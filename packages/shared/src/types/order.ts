@@ -1,5 +1,5 @@
-import type { IPayment } from './payment';
-import type { IDeliveryAssignment } from './delivery';
+import type { IDeliveryAssignment } from './delivery'
+import type { IPayment } from './payment'
 
 export enum OrderStatus {
   PENDING = 'PENDING',
@@ -28,30 +28,30 @@ export enum PaymentStatus {
 }
 
 export interface IOrderItem {
-  id: string;
-  productId: string;
-  variantId?: string;
-  name: string;
-  price: number;
-  quantity: number;
-  total: number;
+  id: string
+  productId: string
+  variantId?: string
+  name: string
+  price: number
+  quantity: number
+  total: number
 }
 
 export interface IOrder {
-  id: string;
-  orderNumber: string;
-  userId: string;
-  addressId: string;
-  status: OrderStatus;
-  subtotal: number;
-  deliveryFee: number;
-  discount: number;
-  tax: number;
-  total: number;
-  deliverySlot?: string;
-  items: IOrderItem[];
-  payment?: IPayment;
-  delivery?: IDeliveryAssignment;
-  createdAt: string;
-  updatedAt: string;
+  id: string
+  orderNumber: string
+  userId: string
+  addressId: string
+  status: OrderStatus
+  subtotal: number
+  deliveryFee: number
+  discount: number
+  tax: number
+  total: number
+  deliverySlot?: string
+  items: IOrderItem[]
+  payment?: IPayment
+  delivery?: IDeliveryAssignment
+  createdAt: string
+  updatedAt: string
 }

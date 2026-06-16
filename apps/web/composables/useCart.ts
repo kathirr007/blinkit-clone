@@ -26,11 +26,11 @@ export function useCart() {
   }
 
   function isInCart(productId: string): boolean {
-    return cartStore.items.some((item) => item.productId === productId)
+    return cartStore.items.some(item => item.productId === productId)
   }
 
   function getItemQuantity(productId: string): number {
-    const item = cartStore.items.find((item) => item.productId === productId)
+    const item = cartStore.items.find(item => item.productId === productId)
     return item?.quantity ?? 0
   }
 

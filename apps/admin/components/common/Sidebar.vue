@@ -38,7 +38,7 @@ function isActive(path: string): boolean {
         :class="[
           isActive(item.path)
             ? 'bg-primary-600 text-white'
-            : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+            : 'text-slate-300 hover:bg-slate-800 hover:text-white',
         ]"
       >
         <Icon :name="item.icon" class="w-5 h-5" />
@@ -48,7 +48,9 @@ function isActive(path: string): boolean {
 
     <!-- Footer -->
     <div class="px-4 py-3 border-t border-slate-700">
-      <p class="text-xs text-slate-400 text-center">Blinkit Admin v0.0.1</p>
+      <p class="text-xs text-slate-400 text-center">
+        Blinkit Admin v0.0.1
+      </p>
     </div>
   </aside>
 </template>

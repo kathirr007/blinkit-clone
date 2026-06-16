@@ -105,17 +105,21 @@ function formatStatus(status: string): string {
     <!-- Page Header -->
     <div class="flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <button @click="router.back()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+        <button class="p-2 hover:bg-gray-100 rounded-lg transition-colors" @click="router.back()">
           <Icon name="heroicons:arrow-left" class="w-5 h-5 text-gray-600" />
         </button>
         <div>
           <div class="flex items-center gap-3">
-            <h1 class="text-2xl font-bold text-gray-900">{{ order.orderNumber }}</h1>
+            <h1 class="text-2xl font-bold text-gray-900">
+              {{ order.orderNumber }}
+            </h1>
             <span class="badge" :class="getStatusBadgeClass(order.status)">
               {{ formatStatus(order.status) }}
             </span>
           </div>
-          <p class="text-sm text-gray-500 mt-1">Placed on {{ order.date }}</p>
+          <p class="text-sm text-gray-500 mt-1">
+            Placed on {{ order.date }}
+          </p>
         </div>
       </div>
 
@@ -133,22 +137,40 @@ function formatStatus(status: string): string {
       <div class="lg:col-span-2 space-y-6">
         <!-- Order Items -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Order Items</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+            Order Items
+          </h2>
           <table class="w-full">
             <thead class="bg-gray-50">
               <tr>
-                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">Item</th>
-                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">Qty</th>
-                <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">Price</th>
-                <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">Total</th>
+                <th class="px-4 py-2 text-left text-xs font-semibold text-gray-600 uppercase">
+                  Item
+                </th>
+                <th class="px-4 py-2 text-center text-xs font-semibold text-gray-600 uppercase">
+                  Qty
+                </th>
+                <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">
+                  Price
+                </th>
+                <th class="px-4 py-2 text-right text-xs font-semibold text-gray-600 uppercase">
+                  Total
+                </th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
               <tr v-for="item in order.items" :key="item.id">
-                <td class="px-4 py-3 text-sm text-gray-900">{{ item.name }}</td>
-                <td class="px-4 py-3 text-sm text-gray-600 text-center">{{ item.quantity }}</td>
-                <td class="px-4 py-3 text-sm text-gray-600 text-right">&#8377;{{ item.price }}</td>
-                <td class="px-4 py-3 text-sm font-medium text-gray-900 text-right">&#8377;{{ item.total }}</td>
+                <td class="px-4 py-3 text-sm text-gray-900">
+                  {{ item.name }}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-600 text-center">
+                  {{ item.quantity }}
+                </td>
+                <td class="px-4 py-3 text-sm text-gray-600 text-right">
+                  &#8377;{{ item.price }}
+                </td>
+                <td class="px-4 py-3 text-sm font-medium text-gray-900 text-right">
+                  &#8377;{{ item.total }}
+                </td>
               </tr>
             </tbody>
           </table>
@@ -180,7 +202,9 @@ function formatStatus(status: string): string {
 
         <!-- Status Timeline -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Order Timeline</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+            Order Timeline
+          </h2>
           <div class="space-y-4">
             <div v-for="(step, index) in order.timeline" :key="index" class="flex items-start gap-3">
               <div class="flex flex-col items-center">
@@ -198,7 +222,7 @@ function formatStatus(status: string): string {
                   v-if="index < order.timeline.length - 1"
                   class="w-0.5 h-8 mt-1"
                   :class="step.completed ? 'bg-primary-600' : 'bg-gray-200'"
-                ></div>
+                />
               </div>
               <div class="pt-1">
                 <p class="text-sm font-medium" :class="step.completed ? 'text-gray-900' : 'text-gray-400'">
@@ -217,7 +241,9 @@ function formatStatus(status: string): string {
       <div class="space-y-6">
         <!-- Update Status -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Update Status</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+            Update Status
+          </h2>
           <div class="space-y-3">
             <select v-model="newStatus" class="input-field">
               <option v-for="opt in statusOptions" :key="opt.value" :value="opt.value">
@@ -232,15 +258,21 @@ function formatStatus(status: string): string {
 
         <!-- Customer Info -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Customer</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+            Customer
+          </h2>
           <div class="space-y-3">
             <div class="flex items-center gap-3">
               <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
                 <Icon name="heroicons:user" class="w-5 h-5 text-gray-500" />
               </div>
               <div>
-                <p class="text-sm font-medium text-gray-900">{{ order.customer.name }}</p>
-                <p class="text-xs text-gray-500">{{ order.customer.email }}</p>
+                <p class="text-sm font-medium text-gray-900">
+                  {{ order.customer.name }}
+                </p>
+                <p class="text-xs text-gray-500">
+                  {{ order.customer.email }}
+                </p>
               </div>
             </div>
             <div class="flex items-center gap-2 text-sm text-gray-600">
@@ -252,18 +284,24 @@ function formatStatus(status: string): string {
 
         <!-- Delivery Address -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Delivery Address</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+            Delivery Address
+          </h2>
           <div class="text-sm text-gray-600 space-y-1">
             <p>{{ order.address.line1 }}</p>
             <p>{{ order.address.line2 }}</p>
             <p>{{ order.address.city }}, {{ order.address.state }}</p>
-            <p class="font-medium">{{ order.address.pincode }}</p>
+            <p class="font-medium">
+              {{ order.address.pincode }}
+            </p>
           </div>
         </div>
 
         <!-- Payment Info -->
         <div class="card">
-          <h2 class="text-lg font-semibold text-gray-900 mb-4">Payment</h2>
+          <h2 class="text-lg font-semibold text-gray-900 mb-4">
+            Payment
+          </h2>
           <div class="space-y-2 text-sm">
             <div class="flex justify-between">
               <span class="text-gray-500">Method</span>

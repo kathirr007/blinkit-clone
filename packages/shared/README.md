@@ -17,7 +17,7 @@ Referenced as a workspace dependency in other packages:
 Import in any app:
 
 ```typescript
-import { IProduct, OrderStatus, DELIVERY_FEE } from '@blinkit/shared'
+import { DELIVERY_FEE, IProduct, OrderStatus } from '@blinkit/shared'
 ```
 
 ## Contents

@@ -1,35 +1,35 @@
-import { IsOptional, IsInt, Min, Max } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Type } from 'class-transformer'
+import { IsInt, IsOptional, Max, Min } from 'class-validator'
 
 export class PaginationDto {
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(1)
-  page: number = 1;
+  page: number = 1
 
   @IsOptional()
   @Type(() => Number)
   @IsInt()
   @Min(1)
   @Max(100)
-  limit: number = 20;
+  limit: number = 20
 
   get skip(): number {
-    return (this.page - 1) * this.limit;
+    return (this.page - 1) * this.limit
   }
 }
 
 export interface PaginatedResponse<T> {
-  data: T[];
+  data: T[]
   meta: {
-    total: number;
-    page: number;
-    limit: number;
-    totalPages: number;
-    hasNextPage: boolean;
-    hasPreviousPage: boolean;
-  };
+    total: number
+    page: number
+    limit: number
+    totalPages: number
+    hasNextPage: boolean
+    hasPreviousPage: boolean
+  }
 }
 
 export function createPaginatedResponse<T>(
@@ -38,7 +38,7 @@ export function createPaginatedResponse<T>(
   page: number,
   limit: number,
 ): PaginatedResponse<T> {
-  const totalPages = Math.ceil(total / limit);
+  const totalPages = Math.ceil(total / limit)
 
   return {
     data,
@@ -50,5 +50,5 @@ export function createPaginatedResponse<T>(
       hasNextPage: page < totalPages,
       hasPreviousPage: page > 1,
     },
-  };
+  }
 }

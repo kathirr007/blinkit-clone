@@ -1,12 +1,3 @@
-<template>
-  <div class="flex items-center justify-center" :class="containerClass">
-    <div
-      class="animate-spin rounded-full border-2 border-gray-300 border-t-[#0c831f]"
-      :class="sizeClass"
-    />
-  </div>
-</template>
-
 <script setup lang="ts">
 interface Props {
   size?: 'sm' | 'md' | 'lg'
@@ -30,3 +21,12 @@ const containerClass = computed(() => {
   return props.fullPage ? 'min-h-[50vh]' : ''
 })
 </script>
+
+<template>
+  <div class="flex items-center justify-center" :class="containerClass">
+    <div
+      class="animate-spin rounded-full border-2 border-gray-300 border-t-[#0c831f]"
+      :class="sizeClass"
+    />
+  </div>
+</template>

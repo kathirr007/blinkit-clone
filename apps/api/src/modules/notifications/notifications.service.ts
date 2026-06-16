@@ -46,7 +46,7 @@ export class NotificationsService {
     return { message: 'All notifications marked as read' }
   }
 
-  async createAndNotify(userId: string, data: { title: string; body: string; type: string; data?: any }) {
+  async createAndNotify(userId: string, data: { title: string, body: string, type: string, data?: any }) {
     const notification = await this.prisma.notification.create({
       data: {
         userId,

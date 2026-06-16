@@ -23,13 +23,13 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  (e: 'page-change', page: number): void
-  (e: 'row-click', row: any): void
+  (e: 'pageChange', page: number): void
+  (e: 'rowClick', row: any): void
 }>()
 
 function goToPage(page: number) {
   if (page >= 1 && page <= props.totalPages) {
-    emit('page-change', page)
+    emit('pageChange', page)
   }
 }
 
@@ -56,7 +56,7 @@ const visiblePages = computed(() => {
               :key="col.key"
               class="px-4 py-3 text-xs font-semibold text-gray-600 uppercase tracking-wider"
               :class="[
-                col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left'
+                col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left',
               ]"
               :style="col.width ? { width: col.width } : {}"
             >
@@ -69,7 +69,7 @@ const visiblePages = computed(() => {
           <tr v-if="loading">
             <td :colspan="columns.length" class="px-4 py-12 text-center">
               <div class="flex flex-col items-center gap-2">
-                <div class="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin"></div>
+                <div class="w-8 h-8 border-4 border-primary-600 border-t-transparent rounded-full animate-spin" />
                 <span class="text-sm text-gray-500">Loading...</span>
               </div>
             </td>
@@ -87,18 +87,18 @@ const visiblePages = computed(() => {
 
           <!-- Data Rows -->
           <tr
-            v-else
             v-for="(row, index) in data"
+            v-else
             :key="index"
             class="hover:bg-gray-50 cursor-pointer transition-colors"
-            @click="emit('row-click', row)"
+            @click="emit('rowClick', row)"
           >
             <td
               v-for="col in columns"
               :key="col.key"
               class="px-4 py-3 text-sm"
               :class="[
-                col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left'
+                col.align === 'center' ? 'text-center' : col.align === 'right' ? 'text-right' : 'text-left',
               ]"
             >
               <slot :name="`cell-${col.key}`" :row="row" :value="row[col.key]">
@@ -133,7 +133,7 @@ const visiblePages = computed(() => {
           :class="[
             page === currentPage
               ? 'bg-primary-600 text-white border-primary-600'
-              : 'border-gray-300 hover:bg-gray-100'
+              : 'border-gray-300 hover:bg-gray-100',
           ]"
           @click="goToPage(page)"
         >

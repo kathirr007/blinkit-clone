@@ -9,7 +9,7 @@ export class SearchService {
     private redis: RedisService,
   ) {}
 
-  async search(query: string, filters?: { category?: string; brand?: string; minPrice?: number; maxPrice?: number; page?: number; limit?: number }) {
+  async search(query: string, filters?: { category?: string, brand?: string, minPrice?: number, maxPrice?: number, page?: number, limit?: number }) {
     const page = filters?.page || 1
     const limit = filters?.limit || 20
     const skip = (page - 1) * limit
@@ -51,7 +51,7 @@ export class SearchService {
       this.prisma.product.count({ where }),
     ])
 
-    const data = products.map((p) => ({
+    const data = products.map(p => ({
       id: p.id,
       name: p.name,
       slug: p.slug,
@@ -93,7 +93,7 @@ export class SearchService {
       orderBy: { avgRating: 'desc' },
     })
 
-    const suggestions = products.map((p) => ({
+    const suggestions = products.map(p => ({
       name: p.name,
       slug: p.slug,
       brand: p.brand,

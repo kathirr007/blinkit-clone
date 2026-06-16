@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { Bar } from 'vue-chartjs'
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
   BarElement,
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
   Title,
   Tooltip,
-  Legend,
 } from 'chart.js'
+import { Bar } from 'vue-chartjs'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
@@ -59,7 +59,9 @@ const chartOptions = {
 <template>
   <div class="card">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-lg font-semibold text-gray-900">Orders by Status</h3>
+      <h3 class="text-lg font-semibold text-gray-900">
+        Orders by Status
+      </h3>
       <span class="text-sm text-gray-500">Today</span>
     </div>
     <div class="h-64">

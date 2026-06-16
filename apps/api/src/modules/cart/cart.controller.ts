@@ -1,17 +1,16 @@
 import {
-  Controller,
-  Get,
-  Post,
-  Patch,
-  Delete,
   Body,
+  Controller,
+  Delete,
+  Get,
   Param,
-  UseGuards,
+  Patch,
+  Post,
 } from '@nestjs/common'
+import { CurrentUser } from '../../common/decorators/current-user.decorator'
 import { CartService } from './cart.service'
 import { AddToCartDto } from './dto/add-to-cart.dto'
 import { UpdateCartItemDto } from './dto/update-cart-item.dto'
-import { CurrentUser } from '../../common/decorators/current-user.decorator'
 
 @Controller('cart')
 export class CartController {

@@ -1,105 +1,105 @@
+import { Type } from 'class-transformer'
 import {
-  IsString,
-  IsNotEmpty,
-  IsOptional,
-  IsNumber,
-  IsPositive,
-  IsInt,
-  IsBoolean,
-  IsUUID,
   IsArray,
-  ValidateNested,
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsPositive,
+  IsString,
+  IsUUID,
   Min,
-} from 'class-validator';
-import { Type } from 'class-transformer';
+  ValidateNested,
+} from 'class-validator'
 
 export class CreateProductVariantDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name: string
 
   @IsNumber()
   @IsPositive()
-  price: number;
+  price: number
 
   @IsString()
   @IsNotEmpty()
-  sku: string;
+  sku: string
 
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  compareAtPrice?: number;
+  compareAtPrice?: number
 }
 
 export class CreateProductDto {
   @IsString()
   @IsNotEmpty()
-  name: string;
+  name: string
 
   @IsString()
   @IsUUID()
-  categoryId: string;
+  categoryId: string
 
   @IsString()
   @IsNotEmpty()
-  sku: string;
+  sku: string
 
   @IsOptional()
   @IsString()
-  description?: string;
+  description?: string
 
   @IsOptional()
   @IsString()
-  shortDescription?: string;
+  shortDescription?: string
 
   @IsOptional()
   @IsString()
-  brand?: string;
+  brand?: string
 
   @IsOptional()
   @IsString()
-  barcode?: string;
+  barcode?: string
 
   @IsNumber()
   @IsPositive()
-  price: number;
-
-  @IsOptional()
-  @IsNumber()
-  @IsPositive()
-  compareAtPrice?: number;
+  price: number
 
   @IsOptional()
   @IsNumber()
   @IsPositive()
-  costPrice?: number;
+  compareAtPrice?: number
+
+  @IsOptional()
+  @IsNumber()
+  @IsPositive()
+  costPrice?: number
 
   @IsOptional()
   @IsString()
-  unit?: string = 'piece';
+  unit?: string = 'piece'
 
   @IsOptional()
   @IsString()
-  unitValue?: string;
+  unitValue?: string
 
   @IsOptional()
   @IsInt()
   @Min(1)
-  minOrderQty?: number = 1;
+  minOrderQty?: number = 1
 
   @IsOptional()
   @IsInt()
   @Min(1)
-  maxOrderQty?: number = 10;
+  maxOrderQty?: number = 10
 
   @IsOptional()
   @IsBoolean()
-  isFeatured?: boolean;
+  isFeatured?: boolean
 
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreateProductVariantDto)
-  variants?: CreateProductVariantDto[];
+  variants?: CreateProductVariantDto[]
 }

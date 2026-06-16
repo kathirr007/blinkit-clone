@@ -17,7 +17,8 @@ export default defineNuxtPlugin(() => {
         try {
           await authStore.refreshTokens()
           // Retry logic would need to be handled at the call site
-        } catch {
+        }
+        catch {
           authStore.logout()
           navigateTo('/login')
         }

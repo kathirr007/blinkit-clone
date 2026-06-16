@@ -1,3 +1,6 @@
+<script setup lang="ts">
+</script>
+
 <template>
   <div
     class="flex items-center bg-white rounded-lg px-3 py-2 gap-2 w-full cursor-pointer"
@@ -7,6 +10,3 @@
     <span class="text-sm text-gray-400">Search for products...</span>
   </div>
 </template>
-
-<script setup lang="ts">
-</script>

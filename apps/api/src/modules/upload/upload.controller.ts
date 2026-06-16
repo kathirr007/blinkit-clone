@@ -1,19 +1,19 @@
 import {
+  BadRequestException,
   Controller,
-  Post,
   Delete,
   Param,
-  UseInterceptors,
+  Post,
   UploadedFile,
   UploadedFiles,
   UseGuards,
-  BadRequestException,
+  UseInterceptors,
 } from '@nestjs/common'
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express'
-import { UploadService } from './upload.service'
+import { UserRole } from '@prisma/client'
 import { Roles } from '../../common/decorators/roles.decorator'
 import { RolesGuard } from '../../common/guards/roles.guard'
-import { UserRole } from '@prisma/client'
+import { UploadService } from './upload.service'
 
 @Controller('upload')
 @UseGuards(RolesGuard)
@@ -26,9 +26,10 @@ export class UploadController {
     FileInterceptor('file', {
       limits: { fileSize: 5 * 1024 * 1024 },
       fileFilter: (_req, file, cb) => {
-        if (!file.mimetype.match(/^image\/(jpeg|png|webp|gif)$/)) {
+        if (!/^image\/(?:jpeg|png|webp|gif)$/.test(file.mimetype)) {
           cb(new BadRequestException('Only image files are allowed'), false)
-        } else {
+        }
+        else {
           cb(null, true)
         }
       },
@@ -45,9 +46,10 @@ export class UploadController {
     FilesInterceptor('files', 10, {
       limits: { fileSize: 5 * 1024 * 1024 },
       fileFilter: (_req, file, cb) => {
-        if (!file.mimetype.match(/^image\/(jpeg|png|webp|gif)$/)) {
+        if (!/^image\/(?:jpeg|png|webp|gif)$/.test(file.mimetype)) {
           cb(new BadRequestException('Only image files are allowed'), false)
-        } else {
+        }
+        else {
           cb(null, true)
         }
       },

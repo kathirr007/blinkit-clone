@@ -22,8 +22,8 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
-    isAuthenticated: (state) => !!state.accessToken,
-    isAdmin: (state) => false, // TODO: Implement admin role check
+    isAuthenticated: state => !!state.accessToken,
+    isAdmin: state => false, // TODO: Implement admin role check
   },
 
   actions: {
@@ -35,9 +35,11 @@ export const useAuthStore = defineStore('auth', {
         // await $api('/auth/send-otp', { method: 'POST', body: { phone } })
         console.log('OTP sent to', phone)
         return { success: true }
-      } catch (error: any) {
+      }
+      catch (error: any) {
         return { success: false, error: error?.message || 'Failed to send OTP' }
-      } finally {
+      }
+      finally {
         this.loading = false
       }
     },
@@ -66,14 +68,16 @@ export const useAuthStore = defineStore('auth', {
         }
 
         return { success: true }
-      } catch (error: any) {
+      }
+      catch (error: any) {
         return { success: false, error: error?.message || 'Invalid OTP' }
-      } finally {
+      }
+      finally {
         this.loading = false
       }
     },
 
-    async signup(data: { name: string; phone: string; email?: string }) {
+    async signup(data: { name: string, phone: string, email?: string }) {
       this.loading = true
       try {
         // TODO: Call API to register user
@@ -81,9 +85,11 @@ export const useAuthStore = defineStore('auth', {
         // await $api('/auth/register', { method: 'POST', body: data })
         console.log('User registered', data)
         return { success: true }
-      } catch (error: any) {
+      }
+      catch (error: any) {
         return { success: false, error: error?.message || 'Signup failed' }
-      } finally {
+      }
+      finally {
         this.loading = false
       }
     },
@@ -95,7 +101,8 @@ export const useAuthStore = defineStore('auth', {
         // const response = await $api('/auth/refresh', { method: 'POST', body: { refreshToken: this.refreshToken } })
         console.log('Tokens refreshed')
         return { success: true }
-      } catch (error) {
+      }
+      catch (error) {
         this.logout()
         throw error
       }
@@ -107,7 +114,8 @@ export const useAuthStore = defineStore('auth', {
         // const { $api } = useNuxtApp()
         // const response = await $api('/auth/profile')
         // this.user = response.data
-      } catch (error) {
+      }
+      catch (error) {
         console.error('Failed to fetch profile', error)
       }
     },

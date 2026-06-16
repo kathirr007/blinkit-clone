@@ -35,7 +35,7 @@ export class InventoryService {
     ])
 
     return {
-      data: items.map((i) => ({
+      data: items.map(i => ({
         ...i,
         availableStock: i.stockQuantity - i.reservedQuantity,
         isLowStock: i.stockQuantity - i.reservedQuantity <= i.lowStockThreshold,

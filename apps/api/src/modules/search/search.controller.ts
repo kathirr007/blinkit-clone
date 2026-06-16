@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common'
-import { SearchService } from './search.service'
 import { Public } from '../../common/decorators/public.decorator'
+import { SearchService } from './search.service'
 
 @Controller('search')
 export class SearchController {
@@ -20,10 +20,10 @@ export class SearchController {
     return this.searchService.search(query || '', {
       category,
       brand,
-      minPrice: minPrice ? parseFloat(minPrice) : undefined,
-      maxPrice: maxPrice ? parseFloat(maxPrice) : undefined,
-      page: page ? parseInt(page) : undefined,
-      limit: limit ? parseInt(limit) : undefined,
+      minPrice: minPrice ? Number.parseFloat(minPrice) : undefined,
+      maxPrice: maxPrice ? Number.parseFloat(maxPrice) : undefined,
+      page: page ? Number.parseInt(page) : undefined,
+      limit: limit ? Number.parseInt(limit) : undefined,
     })
   }
 

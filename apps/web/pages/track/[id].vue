@@ -27,7 +27,7 @@ const statusSteps = [
 ]
 
 const currentStep = computed(() => {
-  const idx = statusSteps.findIndex((s) => s.key === order.value.status)
+  const idx = statusSteps.findIndex(s => s.key === order.value.status)
   return idx >= 0 ? idx : 0
 })
 
@@ -43,8 +43,12 @@ const currentStep = computed(() => {
     <div class="h-64 bg-gray-200 relative flex items-center justify-center">
       <div class="text-center text-gray-500">
         <Icon name="mdi:map-marker" class="text-4xl text-primary-600 mb-2" />
-        <p class="text-sm">Live tracking map</p>
-        <p class="text-xs text-gray-400">Lat: {{ delivery.latitude }}, Lng: {{ delivery.longitude }}</p>
+        <p class="text-sm">
+          Live tracking map
+        </p>
+        <p class="text-xs text-gray-400">
+          Lat: {{ delivery.latitude }}, Lng: {{ delivery.longitude }}
+        </p>
       </div>
       <!-- Back button -->
       <NuxtLink
@@ -60,8 +64,12 @@ const currentStep = computed(() => {
       <div class="card">
         <div class="flex items-center justify-between mb-4">
           <div>
-            <p class="text-sm text-gray-500">Arriving in</p>
-            <p class="text-2xl font-bold text-primary-700">{{ order.estimatedTime }}</p>
+            <p class="text-sm text-gray-500">
+              Arriving in
+            </p>
+            <p class="text-2xl font-bold text-primary-700">
+              {{ order.estimatedTime }}
+            </p>
           </div>
           <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm font-medium">
             {{ order.orderNumber }}
@@ -98,8 +106,12 @@ const currentStep = computed(() => {
                 <Icon name="mdi:account" class="text-xl text-gray-500" />
               </div>
               <div>
-                <p class="font-medium text-sm">{{ delivery.partnerName }}</p>
-                <p class="text-xs text-gray-500">Delivery Partner</p>
+                <p class="font-medium text-sm">
+                  {{ delivery.partnerName }}
+                </p>
+                <p class="text-xs text-gray-500">
+                  Delivery Partner
+                </p>
               </div>
             </div>
             <a

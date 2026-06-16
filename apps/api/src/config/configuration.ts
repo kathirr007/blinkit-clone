@@ -1,7 +1,7 @@
-import { registerAs } from '@nestjs/config';
+import { registerAs } from '@nestjs/config'
 
 export default registerAs('default', () => ({
-  port: parseInt(process.env.API_PORT || '3001', 10),
+  port: Number.parseInt(process.env.API_PORT || '3001', 10),
   environment: process.env.NODE_ENV || 'development',
 
   database: {
@@ -10,7 +10,7 @@ export default registerAs('default', () => ({
 
   redis: {
     host: process.env.REDIS_HOST || 'localhost',
-    port: parseInt(process.env.REDIS_PORT || '6379', 10),
+    port: Number.parseInt(process.env.REDIS_PORT || '6379', 10),
     password: process.env.REDIS_PASSWORD || '',
   },
 
@@ -18,8 +18,8 @@ export default registerAs('default', () => ({
     secret: process.env.JWT_SECRET || 'super-secret-key-change-in-production',
     expiresIn: process.env.JWT_EXPIRES_IN || '7d',
     refreshSecret:
-      process.env.JWT_REFRESH_SECRET ||
-      'super-refresh-secret-key-change-in-production',
+      process.env.JWT_REFRESH_SECRET
+      || 'super-refresh-secret-key-change-in-production',
     refreshExpiresIn: process.env.JWT_REFRESH_EXPIRES_IN || '30d',
   },
 
@@ -35,7 +35,7 @@ export default registerAs('default', () => ({
   },
 
   pagination: {
-    defaultLimit: parseInt(process.env.PAGINATION_DEFAULT_LIMIT || '20', 10),
-    maxLimit: parseInt(process.env.PAGINATION_MAX_LIMIT || '100', 10),
+    defaultLimit: Number.parseInt(process.env.PAGINATION_DEFAULT_LIMIT || '20', 10),
+    maxLimit: Number.parseInt(process.env.PAGINATION_MAX_LIMIT || '100', 10),
   },
-}));
+}))

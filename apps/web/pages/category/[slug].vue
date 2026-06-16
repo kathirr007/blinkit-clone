@@ -1,100 +1,3 @@
-<template>
-  <div class="max-w-7xl mx-auto px-4 py-4">
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-4">
-      <div>
-        <h1 class="text-xl font-bold text-gray-900">{{ categoryName }}</h1>
-        <p class="text-sm text-gray-500">{{ products.length }} products</p>
-      </div>
-      <!-- Sort -->
-      <select v-model="sortBy" class="text-sm border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary-500">
-        <option value="popularity">Popularity</option>
-        <option value="price_low">Price: Low to High</option>
-        <option value="price_high">Price: High to Low</option>
-        <option value="discount">Discount</option>
-      </select>
-    </div>
-
-    <div class="lg:flex lg:gap-6">
-      <!-- Filters Sidebar (Desktop) -->
-      <aside class="hidden lg:block w-56 flex-shrink-0">
-        <div class="card sticky top-20">
-          <h3 class="text-sm font-bold text-gray-900 mb-3">Filters</h3>
-
-          <!-- Price Range -->
-          <div class="mb-4">
-            <h4 class="text-xs font-semibold text-gray-700 mb-2 uppercase">Price Range</h4>
-            <div class="space-y-1">
-              <label v-for="range in priceRanges" :key="range.label" class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-                <input type="checkbox" :value="range.value" v-model="selectedPriceRanges" class="rounded text-[#0c831f] focus:ring-[#0c831f]" />
-                {{ range.label }}
-              </label>
-            </div>
-          </div>
-
-          <!-- Brand -->
-          <div>
-            <h4 class="text-xs font-semibold text-gray-700 mb-2 uppercase">Brand</h4>
-            <div class="space-y-1">
-              <label v-for="brand in brands" :key="brand" class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
-                <input type="checkbox" :value="brand" v-model="selectedBrands" class="rounded text-[#0c831f] focus:ring-[#0c831f]" />
-                {{ brand }}
-              </label>
-            </div>
-          </div>
-        </div>
-      </aside>
-
-      <!-- Product Grid -->
-      <div class="flex-1">
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-          <div
-            v-for="product in sortedProducts"
-            :key="product.id"
-            class="card hover:shadow-md transition-shadow cursor-pointer"
-            @click="navigateTo(`/product/${product.slug}`)"
-          >
-            <div class="relative mb-2">
-              <img :src="product.image" :alt="product.name" class="w-full h-28 sm:h-32 object-contain" />
-              <span v-if="product.compareAtPrice" class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-                {{ getDiscountPercentage(product.price, product.compareAtPrice) }}% OFF
-              </span>
-            </div>
-            <p class="text-xs text-gray-500 mb-0.5">{{ product.brand }}</p>
-            <p class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">{{ product.name }}</p>
-            <p class="text-xs text-gray-500 mb-2">{{ product.unit }}</p>
-            <div class="flex items-center justify-between">
-              <div>
-                <span class="text-sm font-bold text-gray-900">{{ formatPrice(product.price) }}</span>
-                <span v-if="product.compareAtPrice" class="text-xs text-gray-400 line-through ml-1">{{ formatPrice(product.compareAtPrice) }}</span>
-              </div>
-              <button
-                class="bg-[#0c831f] text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-[#0a6e1a] transition-colors"
-                @click.stop="addToCart(product)"
-              >
-                ADD
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pagination -->
-        <div class="flex justify-center mt-8 gap-2">
-          <button
-            v-for="page in totalPages"
-            :key="page"
-            class="w-8 h-8 rounded-lg text-sm font-medium transition-colors"
-            :class="currentPage === page ? 'bg-[#0c831f] text-white' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'"
-            @click="currentPage = page"
-          >
-            {{ page }}
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { formatPrice, getDiscountPercentage } from '~/utils/formatters'
 
@@ -161,3 +64,124 @@ function addToCart(product: any) {
   })
 }
 </script>
+
+<template>
+  <div class="max-w-7xl mx-auto px-4 py-4">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h1 class="text-xl font-bold text-gray-900">
+          {{ categoryName }}
+        </h1>
+        <p class="text-sm text-gray-500">
+          {{ products.length }} products
+        </p>
+      </div>
+      <!-- Sort -->
+      <select v-model="sortBy" class="text-sm border border-gray-300 rounded-lg px-3 py-2 outline-none focus:ring-2 focus:ring-primary-500">
+        <option value="popularity">
+          Popularity
+        </option>
+        <option value="price_low">
+          Price: Low to High
+        </option>
+        <option value="price_high">
+          Price: High to Low
+        </option>
+        <option value="discount">
+          Discount
+        </option>
+      </select>
+    </div>
+
+    <div class="lg:flex lg:gap-6">
+      <!-- Filters Sidebar (Desktop) -->
+      <aside class="hidden lg:block w-56 flex-shrink-0">
+        <div class="card sticky top-20">
+          <h3 class="text-sm font-bold text-gray-900 mb-3">
+            Filters
+          </h3>
+
+          <!-- Price Range -->
+          <div class="mb-4">
+            <h4 class="text-xs font-semibold text-gray-700 mb-2 uppercase">
+              Price Range
+            </h4>
+            <div class="space-y-1">
+              <label v-for="range in priceRanges" :key="range.label" class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                <input v-model="selectedPriceRanges" type="checkbox" :value="range.value" class="rounded text-[#0c831f] focus:ring-[#0c831f]">
+                {{ range.label }}
+              </label>
+            </div>
+          </div>
+
+          <!-- Brand -->
+          <div>
+            <h4 class="text-xs font-semibold text-gray-700 mb-2 uppercase">
+              Brand
+            </h4>
+            <div class="space-y-1">
+              <label v-for="brand in brands" :key="brand" class="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                <input v-model="selectedBrands" type="checkbox" :value="brand" class="rounded text-[#0c831f] focus:ring-[#0c831f]">
+                {{ brand }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Product Grid -->
+      <div class="flex-1">
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+          <div
+            v-for="product in sortedProducts"
+            :key="product.id"
+            class="card hover:shadow-md transition-shadow cursor-pointer"
+            @click="navigateTo(`/product/${product.slug}`)"
+          >
+            <div class="relative mb-2">
+              <img :src="product.image" :alt="product.name" class="w-full h-28 sm:h-32 object-contain">
+              <span v-if="product.compareAtPrice" class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+                {{ getDiscountPercentage(product.price, product.compareAtPrice) }}% OFF
+              </span>
+            </div>
+            <p class="text-xs text-gray-500 mb-0.5">
+              {{ product.brand }}
+            </p>
+            <p class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+              {{ product.name }}
+            </p>
+            <p class="text-xs text-gray-500 mb-2">
+              {{ product.unit }}
+            </p>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-sm font-bold text-gray-900">{{ formatPrice(product.price) }}</span>
+                <span v-if="product.compareAtPrice" class="text-xs text-gray-400 line-through ml-1">{{ formatPrice(product.compareAtPrice) }}</span>
+              </div>
+              <button
+                class="bg-[#0c831f] text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-[#0a6e1a] transition-colors"
+                @click.stop="addToCart(product)"
+              >
+                ADD
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-8 gap-2">
+          <button
+            v-for="page in totalPages"
+            :key="page"
+            class="w-8 h-8 rounded-lg text-sm font-medium transition-colors"
+            :class="currentPage === page ? 'bg-[#0c831f] text-white' : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'"
+            @click="currentPage = page"
+          >
+            {{ page }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

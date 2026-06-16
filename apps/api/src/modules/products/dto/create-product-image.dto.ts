@@ -1,20 +1,20 @@
-import { IsString, IsNotEmpty, IsOptional, IsInt, IsBoolean, Min } from 'class-validator';
+import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator'
 
 export class CreateProductImageDto {
   @IsString()
   @IsNotEmpty()
-  url: string;
+  url: string
 
   @IsOptional()
   @IsString()
-  altText?: string;
+  altText?: string
 
   @IsOptional()
   @IsInt()
   @Min(0)
-  sortOrder?: number;
+  sortOrder?: number
 
   @IsOptional()
   @IsBoolean()
-  isPrimary?: boolean;
+  isPrimary?: boolean
 }

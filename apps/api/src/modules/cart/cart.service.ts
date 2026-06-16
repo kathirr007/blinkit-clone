@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 import { PrismaService } from '../../prisma/prisma.service'
 import { RedisService } from '../../redis/redis.service'
 import { AddToCartDto } from './dto/add-to-cart.dto'
@@ -114,7 +114,8 @@ export class CartService {
         where: { id: existingItem.id },
         data: { quantity: newQty },
       })
-    } else {
+    }
+    else {
       await this.prisma.cartItem.create({
         data: {
           cartId: cart.id,
@@ -142,7 +143,8 @@ export class CartService {
 
     if (dto.quantity <= 0) {
       await this.prisma.cartItem.delete({ where: { id: itemId } })
-    } else {
+    }
+    else {
       if (dto.quantity > item.product.maxOrderQty) {
         throw new BadRequestException(`Maximum ${item.product.maxOrderQty} items allowed`)
       }

@@ -18,8 +18,12 @@ withDefaults(defineProps<Props>(), {
   <div class="card">
     <div class="flex items-start justify-between">
       <div class="flex-1">
-        <p class="text-sm font-medium text-gray-500">{{ label }}</p>
-        <p class="mt-1 text-2xl font-bold text-gray-900">{{ value }}</p>
+        <p class="text-sm font-medium text-gray-500">
+          {{ label }}
+        </p>
+        <p class="mt-1 text-2xl font-bold text-gray-900">
+          {{ value }}
+        </p>
         <div v-if="trend !== undefined" class="mt-2 flex items-center gap-1">
           <Icon
             :name="trend >= 0 ? 'heroicons:arrow-trending-up' : 'heroicons:arrow-trending-down'"

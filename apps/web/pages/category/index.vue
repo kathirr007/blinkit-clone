@@ -1,24 +1,3 @@
-<template>
-  <div class="max-w-7xl mx-auto px-4 py-4">
-    <h1 class="text-xl font-bold text-gray-900 mb-4">All Categories</h1>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-      <NuxtLink
-        v-for="category in categories"
-        :key="category.id"
-        :to="`/category/${category.slug}`"
-        class="card hover:shadow-md transition-shadow text-center"
-      >
-        <div class="w-20 h-20 mx-auto mb-3 rounded-full bg-green-50 flex items-center justify-center overflow-hidden">
-          <img :src="category.image" :alt="category.name" class="w-14 h-14 object-contain" />
-        </div>
-        <h3 class="text-sm font-medium text-gray-900 mb-1">{{ category.name }}</h3>
-        <p class="text-xs text-gray-500">{{ category.productCount }} products</p>
-      </NuxtLink>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 // TODO: Fetch categories from API
 const categories = ref([
@@ -36,3 +15,30 @@ const categories = ref([
   { id: '12', name: 'Sweet Cravings', slug: 'sweet-cravings', image: 'https://via.placeholder.com/80x80/a855f7/ffffff?text=SC', productCount: 40 },
 ])
 </script>
+
+<template>
+  <div class="max-w-7xl mx-auto px-4 py-4">
+    <h1 class="text-xl font-bold text-gray-900 mb-4">
+      All Categories
+    </h1>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <NuxtLink
+        v-for="category in categories"
+        :key="category.id"
+        :to="`/category/${category.slug}`"
+        class="card hover:shadow-md transition-shadow text-center"
+      >
+        <div class="w-20 h-20 mx-auto mb-3 rounded-full bg-green-50 flex items-center justify-center overflow-hidden">
+          <img :src="category.image" :alt="category.name" class="w-14 h-14 object-contain">
+        </div>
+        <h3 class="text-sm font-medium text-gray-900 mb-1">
+          {{ category.name }}
+        </h3>
+        <p class="text-xs text-gray-500">
+          {{ category.productCount }} products
+        </p>
+      </NuxtLink>
+    </div>
+  </div>
+</template>

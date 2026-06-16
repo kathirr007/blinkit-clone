@@ -1,12 +1,12 @@
 import {
+  BadRequestException,
   Injectable,
   NotFoundException,
-  BadRequestException,
 } from '@nestjs/common'
-import { PrismaService } from '../../prisma/prisma.service'
 import { ConfigService } from '@nestjs/config'
+import { OrderStatus, PaymentMethod, PaymentStatus } from '@prisma/client'
+import { PrismaService } from '../../prisma/prisma.service'
 import { CreatePaymentDto } from './dto/create-payment.dto'
-import { PaymentMethod, PaymentStatus, OrderStatus } from '@prisma/client'
 
 @Injectable()
 export class PaymentsService {
@@ -79,7 +79,7 @@ export class PaymentsService {
     }
   }
 
-  async verifyPayment(dto: { paymentId: string; transactionId: string; status: 'success' | 'failed' }) {
+  async verifyPayment(dto: { paymentId: string, transactionId: string, status: 'success' | 'failed' }) {
     const payment = await this.prisma.payment.findUnique({
       where: { id: dto.paymentId },
       include: { order: true },
@@ -114,7 +114,8 @@ export class PaymentsService {
       })
 
       return { status: 'success', message: 'Payment verified and order confirmed' }
-    } else {
+    }
+    else {
       await this.prisma.payment.update({
         where: { id: payment.id },
         data: {

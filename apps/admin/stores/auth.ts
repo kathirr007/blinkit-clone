@@ -22,7 +22,7 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
-    isAdmin: (state) => state.user?.role === 'ADMIN' || state.user?.role === 'SUPER_ADMIN',
+    isAdmin: state => state.user?.role === 'ADMIN' || state.user?.role === 'SUPER_ADMIN',
   },
 
   actions: {
@@ -37,7 +37,7 @@ export const useAuthStore = defineStore('auth', {
             email,
             role: 'ADMIN' as const,
           },
-          token: 'mock-admin-token-' + Date.now(),
+          token: `mock-admin-token-${Date.now()}`,
         }
 
         this.user = response.user
@@ -51,7 +51,8 @@ export const useAuthStore = defineStore('auth', {
         }
 
         return { success: true }
-      } catch (error: any) {
+      }
+      catch (error: any) {
         return { success: false, error: error.message || 'Login failed' }
       }
     },

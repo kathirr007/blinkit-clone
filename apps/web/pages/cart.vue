@@ -1,13 +1,27 @@
+<script setup lang="ts">
+import { formatPrice } from '~/utils/formatters'
+
+const { items, count, subtotal, deliveryFee, total, isEmpty, updateQuantity } = useCart()
+</script>
+
 <template>
   <div class="max-w-4xl mx-auto px-4 py-4">
-    <h1 class="text-xl font-bold text-gray-900 mb-4">My Cart</h1>
+    <h1 class="text-xl font-bold text-gray-900 mb-4">
+      My Cart
+    </h1>
 
     <!-- Empty Cart -->
     <div v-if="isEmpty" class="text-center py-16">
       <Icon name="mdi:cart-outline" class="w-20 h-20 text-gray-300 mx-auto mb-4" />
-      <h3 class="text-lg font-medium text-gray-700 mb-2">Your cart is empty</h3>
-      <p class="text-gray-500 mb-6">Add items to get started</p>
-      <NuxtLink to="/" class="btn-primary inline-block">Browse Products</NuxtLink>
+      <h3 class="text-lg font-medium text-gray-700 mb-2">
+        Your cart is empty
+      </h3>
+      <p class="text-gray-500 mb-6">
+        Add items to get started
+      </p>
+      <NuxtLink to="/" class="btn-primary inline-block">
+        Browse Products
+      </NuxtLink>
     </div>
 
     <!-- Cart Items -->
@@ -19,10 +33,14 @@
           :key="item.productId"
           class="card flex gap-3"
         >
-          <img :src="item.image" :alt="item.name" class="w-16 h-16 object-contain rounded flex-shrink-0" />
+          <img :src="item.image" :alt="item.name" class="w-16 h-16 object-contain rounded flex-shrink-0">
           <div class="flex-1 min-w-0">
-            <p class="text-sm font-medium text-gray-900 line-clamp-1">{{ item.name }}</p>
-            <p class="text-xs text-gray-500">{{ item.unit }}</p>
+            <p class="text-sm font-medium text-gray-900 line-clamp-1">
+              {{ item.name }}
+            </p>
+            <p class="text-xs text-gray-500">
+              {{ item.unit }}
+            </p>
             <div class="flex items-center justify-between mt-2">
               <span class="text-sm font-bold text-gray-900">{{ formatPrice(item.price * item.quantity) }}</span>
               <div class="flex items-center border border-[#0c831f] rounded overflow-hidden">
@@ -50,7 +68,9 @@
       <!-- Cart Summary -->
       <div class="lg:col-span-1">
         <div class="card sticky top-20">
-          <h3 class="text-base font-bold text-gray-900 mb-4">Bill Details</h3>
+          <h3 class="text-base font-bold text-gray-900 mb-4">
+            Bill Details
+          </h3>
           <div class="space-y-2 text-sm">
             <div class="flex justify-between">
               <span class="text-gray-600">Subtotal</span>
@@ -65,7 +85,7 @@
             <div v-if="deliveryFee > 0" class="text-xs text-green-600">
               Free delivery on orders above ₹199
             </div>
-            <hr class="my-2" />
+            <hr class="my-2">
             <div class="flex justify-between text-base font-bold">
               <span>Total</span>
               <span>{{ formatPrice(total) }}</span>
@@ -82,9 +102,3 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { formatPrice } from '~/utils/formatters'
-
-const { items, count, subtotal, deliveryFee, total, isEmpty, updateQuantity } = useCart()
-</script>

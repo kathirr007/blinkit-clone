@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { Line } from 'vue-chartjs'
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Filler,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend,
-  Filler,
 } from 'chart.js'
+import { Line } from 'vue-chartjs'
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, Filler)
 
@@ -68,7 +68,9 @@ const chartOptions = {
 <template>
   <div class="card">
     <div class="flex items-center justify-between mb-4">
-      <h3 class="text-lg font-semibold text-gray-900">Revenue (Last 7 Days)</h3>
+      <h3 class="text-lg font-semibold text-gray-900">
+        Revenue (Last 7 Days)
+      </h3>
       <span class="text-sm text-gray-500">Total: ₹4,02,000</span>
     </div>
     <div class="h-64">

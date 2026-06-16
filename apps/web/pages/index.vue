@@ -1,108 +1,3 @@
-<template>
-  <div class="max-w-7xl mx-auto px-4 py-4 space-y-6">
-    <!-- Hero Banner / Carousel -->
-    <section class="relative rounded-xl overflow-hidden bg-gradient-to-r from-[#0c831f] to-[#2aaa41] h-40 sm:h-56 flex items-center px-6 sm:px-10">
-      <div class="text-white">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-2">Grocery delivery in minutes</h2>
-        <p class="text-green-100 text-sm sm:text-base">Get fresh fruits, vegetables, and daily essentials delivered at your doorstep</p>
-      </div>
-      <!-- TODO: Implement carousel with API banners -->
-    </section>
-
-    <!-- Category Grid -->
-    <section>
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-bold text-gray-900">Shop by Category</h3>
-        <NuxtLink to="/category" class="text-sm text-[#0c831f] font-medium hover:underline">See all</NuxtLink>
-      </div>
-      <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
-        <NuxtLink
-          v-for="category in categories"
-          :key="category.id"
-          :to="`/category/${category.slug}`"
-          class="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-green-50 transition-colors"
-        >
-          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-50 flex items-center justify-center overflow-hidden">
-            <img :src="category.image" :alt="category.name" class="w-10 h-10 object-contain" />
-          </div>
-          <span class="text-xs text-center font-medium text-gray-700 line-clamp-2">{{ category.name }}</span>
-        </NuxtLink>
-      </div>
-    </section>
-
-    <!-- Deal of the Day -->
-    <section>
-      <div class="flex items-center justify-between mb-4">
-        <div class="flex items-center gap-2">
-          <h3 class="text-lg font-bold text-gray-900">Deal of the Day</h3>
-          <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">SALE</span>
-        </div>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-        <div
-          v-for="product in dealProducts"
-          :key="product.id"
-          class="card hover:shadow-md transition-shadow cursor-pointer"
-          @click="navigateTo(`/product/${product.slug}`)"
-        >
-          <div class="relative mb-2">
-            <img :src="product.image" :alt="product.name" class="w-full h-28 sm:h-32 object-contain" />
-            <span v-if="product.compareAtPrice" class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-              {{ getDiscountPercentage(product.price, product.compareAtPrice) }}% OFF
-            </span>
-          </div>
-          <p class="text-xs text-gray-500 mb-0.5">{{ product.brand }}</p>
-          <p class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">{{ product.name }}</p>
-          <p class="text-xs text-gray-500 mb-2">{{ product.unit }}</p>
-          <div class="flex items-center justify-between">
-            <div>
-              <span class="text-sm font-bold text-gray-900">{{ formatPrice(product.price) }}</span>
-              <span v-if="product.compareAtPrice" class="text-xs text-gray-400 line-through ml-1">{{ formatPrice(product.compareAtPrice) }}</span>
-            </div>
-            <button
-              class="bg-[#0c831f] text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-[#0a6e1a] transition-colors"
-              @click.stop="addToCart(product)"
-            >
-              ADD
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Trending Products -->
-    <section>
-      <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-bold text-gray-900">Trending Products</h3>
-      </div>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-        <div
-          v-for="product in trendingProducts"
-          :key="product.id"
-          class="card hover:shadow-md transition-shadow cursor-pointer"
-          @click="navigateTo(`/product/${product.slug}`)"
-        >
-          <div class="relative mb-2">
-            <img :src="product.image" :alt="product.name" class="w-full h-28 sm:h-32 object-contain" />
-          </div>
-          <p class="text-xs text-gray-500 mb-0.5">{{ product.brand }}</p>
-          <p class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">{{ product.name }}</p>
-          <p class="text-xs text-gray-500 mb-2">{{ product.unit }}</p>
-          <div class="flex items-center justify-between">
-            <span class="text-sm font-bold text-gray-900">{{ formatPrice(product.price) }}</span>
-            <button
-              class="bg-[#0c831f] text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-[#0a6e1a] transition-colors"
-              @click.stop="addToCart(product)"
-            >
-              ADD
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { formatPrice, getDiscountPercentage } from '~/utils/formatters'
 
@@ -150,3 +45,132 @@ function addToCart(product: any) {
   })
 }
 </script>
+
+<template>
+  <div class="max-w-7xl mx-auto px-4 py-4 space-y-6">
+    <!-- Hero Banner / Carousel -->
+    <section class="relative rounded-xl overflow-hidden bg-gradient-to-r from-[#0c831f] to-[#2aaa41] h-40 sm:h-56 flex items-center px-6 sm:px-10">
+      <div class="text-white">
+        <h2 class="text-2xl sm:text-3xl font-bold mb-2">
+          Grocery delivery in minutes
+        </h2>
+        <p class="text-green-100 text-sm sm:text-base">
+          Get fresh fruits, vegetables, and daily essentials delivered at your doorstep
+        </p>
+      </div>
+      <!-- TODO: Implement carousel with API banners -->
+    </section>
+
+    <!-- Category Grid -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-gray-900">
+          Shop by Category
+        </h3>
+        <NuxtLink to="/category" class="text-sm text-[#0c831f] font-medium hover:underline">
+          See all
+        </NuxtLink>
+      </div>
+      <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+        <NuxtLink
+          v-for="category in categories"
+          :key="category.id"
+          :to="`/category/${category.slug}`"
+          class="flex flex-col items-center gap-2 p-2 rounded-lg hover:bg-green-50 transition-colors"
+        >
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-green-50 flex items-center justify-center overflow-hidden">
+            <img :src="category.image" :alt="category.name" class="w-10 h-10 object-contain">
+          </div>
+          <span class="text-xs text-center font-medium text-gray-700 line-clamp-2">{{ category.name }}</span>
+        </NuxtLink>
+      </div>
+    </section>
+
+    <!-- Deal of the Day -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <h3 class="text-lg font-bold text-gray-900">
+            Deal of the Day
+          </h3>
+          <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-0.5 rounded">SALE</span>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        <div
+          v-for="product in dealProducts"
+          :key="product.id"
+          class="card hover:shadow-md transition-shadow cursor-pointer"
+          @click="navigateTo(`/product/${product.slug}`)"
+        >
+          <div class="relative mb-2">
+            <img :src="product.image" :alt="product.name" class="w-full h-28 sm:h-32 object-contain">
+            <span v-if="product.compareAtPrice" class="absolute top-0 left-0 bg-blue-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
+              {{ getDiscountPercentage(product.price, product.compareAtPrice) }}% OFF
+            </span>
+          </div>
+          <p class="text-xs text-gray-500 mb-0.5">
+            {{ product.brand }}
+          </p>
+          <p class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+            {{ product.name }}
+          </p>
+          <p class="text-xs text-gray-500 mb-2">
+            {{ product.unit }}
+          </p>
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-sm font-bold text-gray-900">{{ formatPrice(product.price) }}</span>
+              <span v-if="product.compareAtPrice" class="text-xs text-gray-400 line-through ml-1">{{ formatPrice(product.compareAtPrice) }}</span>
+            </div>
+            <button
+              class="bg-[#0c831f] text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-[#0a6e1a] transition-colors"
+              @click.stop="addToCart(product)"
+            >
+              ADD
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trending Products -->
+    <section>
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-lg font-bold text-gray-900">
+          Trending Products
+        </h3>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+        <div
+          v-for="product in trendingProducts"
+          :key="product.id"
+          class="card hover:shadow-md transition-shadow cursor-pointer"
+          @click="navigateTo(`/product/${product.slug}`)"
+        >
+          <div class="relative mb-2">
+            <img :src="product.image" :alt="product.name" class="w-full h-28 sm:h-32 object-contain">
+          </div>
+          <p class="text-xs text-gray-500 mb-0.5">
+            {{ product.brand }}
+          </p>
+          <p class="text-sm font-medium text-gray-900 line-clamp-2 mb-1">
+            {{ product.name }}
+          </p>
+          <p class="text-xs text-gray-500 mb-2">
+            {{ product.unit }}
+          </p>
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-gray-900">{{ formatPrice(product.price) }}</span>
+            <button
+              class="bg-[#0c831f] text-white text-xs font-bold px-3 py-1.5 rounded hover:bg-[#0a6e1a] transition-colors"
+              @click.stop="addToCart(product)"
+            >
+              ADD
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</template>

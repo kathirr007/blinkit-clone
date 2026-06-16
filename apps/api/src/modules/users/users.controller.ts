@@ -1,6 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { CurrentUser } from '../../common/decorators/current-user.decorator';
+import { Controller, Get } from '@nestjs/common'
+import { CurrentUser } from '../../common/decorators/current-user.decorator'
+import { UsersService } from './users.service'
 
 @Controller('users')
 export class UsersController {
@@ -8,6 +8,6 @@ export class UsersController {
 
   @Get('me')
   async getMe(@CurrentUser('sub') userId: string) {
-    return this.usersService.findById(userId);
+    return this.usersService.findById(userId)
   }
 }

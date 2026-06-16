@@ -1,7 +1,7 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common'
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
+import { OrderStatus, UserRole } from '@prisma/client'
 import { PrismaService } from '../../prisma/prisma.service'
 import { NotificationsGateway } from '../notifications/notifications.gateway'
-import { OrderStatus, UserRole } from '@prisma/client'
 import { AssignDeliveryDto } from './dto/assign-delivery.dto'
 import { UpdateLocationDto } from './dto/update-location.dto'
 

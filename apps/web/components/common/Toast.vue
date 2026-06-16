@@ -1,24 +1,3 @@
-<template>
-  <Teleport to="body">
-    <div class="fixed top-4 right-4 z-[100] flex flex-col gap-2">
-      <TransitionGroup name="toast">
-        <div
-          v-for="notification in notifications"
-          :key="notification.id"
-          class="flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] max-w-md"
-          :class="typeClasses(notification.type)"
-        >
-          <Icon :name="typeIcon(notification.type)" class="w-5 h-5 flex-shrink-0" />
-          <p class="text-sm font-medium flex-1">{{ notification.message }}</p>
-          <button @click="dismiss(notification.id)" class="p-1 hover:opacity-70">
-            <Icon name="mdi:close" class="w-4 h-4" />
-          </button>
-        </div>
-      </TransitionGroup>
-    </div>
-  </Teleport>
-</template>
-
 <script setup lang="ts">
 const { notifications, dismiss } = useNotification()
 
@@ -40,6 +19,29 @@ function typeIcon(type: string): string {
   }
 }
 </script>
+
+<template>
+  <Teleport to="body">
+    <div class="fixed top-4 right-4 z-[100] flex flex-col gap-2">
+      <TransitionGroup name="toast">
+        <div
+          v-for="notification in notifications"
+          :key="notification.id"
+          class="flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg min-w-[300px] max-w-md"
+          :class="typeClasses(notification.type)"
+        >
+          <Icon :name="typeIcon(notification.type)" class="w-5 h-5 flex-shrink-0" />
+          <p class="text-sm font-medium flex-1">
+            {{ notification.message }}
+          </p>
+          <button class="p-1 hover:opacity-70" @click="dismiss(notification.id)">
+            <Icon name="mdi:close" class="w-4 h-4" />
+          </button>
+        </div>
+      </TransitionGroup>
+    </div>
+  </Teleport>
+</template>
 
 <style scoped>
 .toast-enter-active,

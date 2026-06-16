@@ -1,9 +1,9 @@
-import { Controller, Get, Patch, Param, Query, Body, UseGuards } from '@nestjs/common'
-import { InventoryService } from './inventory.service'
-import { UpdateStockDto } from './dto/update-stock.dto'
+import { Body, Controller, Get, Param, Patch, Query, UseGuards } from '@nestjs/common'
+import { UserRole } from '@prisma/client'
 import { Roles } from '../../common/decorators/roles.decorator'
 import { RolesGuard } from '../../common/guards/roles.guard'
-import { UserRole } from '@prisma/client'
+import { UpdateStockDto } from './dto/update-stock.dto'
+import { InventoryService } from './inventory.service'
 
 @Controller('admin/inventory')
 @UseGuards(RolesGuard)
@@ -18,8 +18,8 @@ export class InventoryController {
     @Query('search') search?: string,
   ) {
     return this.inventoryService.findAll(
-      page ? parseInt(page) : 1,
-      limit ? parseInt(limit) : 20,
+      page ? Number.parseInt(page) : 1,
+      limit ? Number.parseInt(limit) : 20,
       search,
     )
   }
@@ -42,8 +42,8 @@ export class InventoryController {
   ) {
     return this.inventoryService.getLogs(
       productId,
-      page ? parseInt(page) : 1,
-      limit ? parseInt(limit) : 20,
+      page ? Number.parseInt(page) : 1,
+      limit ? Number.parseInt(limit) : 20,
     )
   }
 }

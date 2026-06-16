@@ -52,7 +52,8 @@ function updateStock() {
     if (stockAction.value === 'increment') {
       product.stock += stockQuantity.value
       product.available += stockQuantity.value
-    } else {
+    }
+    else {
       product.stock = Math.max(0, product.stock - stockQuantity.value)
       product.available = Math.max(0, product.available - stockQuantity.value)
     }
@@ -80,8 +81,12 @@ function handlePageChange(page: number) {
     <!-- Page Header -->
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900">Inventory</h1>
-        <p class="text-sm text-gray-500 mt-1">Monitor and manage stock levels</p>
+        <h1 class="text-2xl font-bold text-gray-900">
+          Inventory
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">
+          Monitor and manage stock levels
+        </p>
       </div>
       <div class="flex items-center gap-3">
         <div class="flex items-center gap-2 text-sm text-red-600 bg-red-50 px-3 py-1.5 rounded-lg">
@@ -141,8 +146,8 @@ function handlePageChange(page: number) {
         <div class="flex items-center justify-center" @click.stop>
           <button
             class="p-1.5 text-gray-500 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
-            @click="openUpdateModal(row)"
             title="Update stock"
+            @click="openUpdateModal(row)"
           >
             <Icon name="heroicons:pencil-square" class="w-4 h-4" />
           </button>
@@ -153,10 +158,14 @@ function handlePageChange(page: number) {
     <!-- Update Stock Modal -->
     <Teleport to="body">
       <div v-if="showUpdateModal" class="fixed inset-0 z-50 flex items-center justify-center">
-        <div class="absolute inset-0 bg-black/50" @click="showUpdateModal = false"></div>
+        <div class="absolute inset-0 bg-black/50" @click="showUpdateModal = false" />
         <div class="relative bg-white rounded-xl shadow-xl w-full max-w-md mx-4 p-6">
-          <h3 class="text-lg font-semibold text-gray-900 mb-1">Update Stock</h3>
-          <p class="text-sm text-gray-500 mb-4">{{ selectedProduct?.product }}</p>
+          <h3 class="text-lg font-semibold text-gray-900 mb-1">
+            Update Stock
+          </h3>
+          <p class="text-sm text-gray-500 mb-4">
+            {{ selectedProduct?.product }}
+          </p>
 
           <div class="space-y-4">
             <!-- Current Stock Info -->
@@ -170,11 +179,11 @@ function handlePageChange(page: number) {
               <label class="block text-sm font-medium text-gray-700 mb-2">Action</label>
               <div class="flex gap-3">
                 <label class="flex items-center gap-2 cursor-pointer">
-                  <input v-model="stockAction" type="radio" value="increment" class="text-primary-600" />
+                  <input v-model="stockAction" type="radio" value="increment" class="text-primary-600">
                   <span class="text-sm">Add Stock</span>
                 </label>
                 <label class="flex items-center gap-2 cursor-pointer">
-                  <input v-model="stockAction" type="radio" value="decrement" class="text-primary-600" />
+                  <input v-model="stockAction" type="radio" value="decrement" class="text-primary-600">
                   <span class="text-sm">Remove Stock</span>
                 </label>
               </div>
@@ -183,26 +192,40 @@ function handlePageChange(page: number) {
             <!-- Quantity -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
-              <input v-model.number="stockQuantity" type="number" class="input-field" min="1" placeholder="Enter quantity" />
+              <input v-model.number="stockQuantity" type="number" class="input-field" min="1" placeholder="Enter quantity">
             </div>
 
             <!-- Reason -->
             <div>
               <label class="block text-sm font-medium text-gray-700 mb-1">Reason</label>
               <select v-model="stockReason" class="input-field">
-                <option value="">Select reason</option>
-                <option value="restock">Restock / New Shipment</option>
-                <option value="damaged">Damaged / Expired</option>
-                <option value="correction">Stock Correction</option>
-                <option value="return">Customer Return</option>
-                <option value="other">Other</option>
+                <option value="">
+                  Select reason
+                </option>
+                <option value="restock">
+                  Restock / New Shipment
+                </option>
+                <option value="damaged">
+                  Damaged / Expired
+                </option>
+                <option value="correction">
+                  Stock Correction
+                </option>
+                <option value="return">
+                  Customer Return
+                </option>
+                <option value="other">
+                  Other
+                </option>
               </select>
             </div>
 
             <!-- Actions -->
             <div class="flex justify-end gap-3 pt-2">
-              <button class="btn-secondary" @click="showUpdateModal = false">Cancel</button>
-              <button class="btn-primary" @click="updateStock" :disabled="stockQuantity <= 0">
+              <button class="btn-secondary" @click="showUpdateModal = false">
+                Cancel
+              </button>
+              <button class="btn-primary" :disabled="stockQuantity <= 0" @click="updateStock">
                 Update Stock
               </button>
             </div>

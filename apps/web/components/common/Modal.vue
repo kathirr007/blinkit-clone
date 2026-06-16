@@ -1,3 +1,18 @@
+<script setup lang="ts">
+interface Props {
+  modelValue: boolean
+}
+
+defineProps<Props>()
+const emit = defineEmits<{
+  'update:modelValue': [value: boolean]
+}>()
+
+function close() {
+  emit('update:modelValue', false)
+}
+</script>
+
 <template>
   <Teleport to="body">
     <Transition name="modal">
@@ -10,9 +25,11 @@
           <!-- Header -->
           <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
             <h3 class="text-lg font-semibold text-gray-900">
-              <slot name="title">Modal Title</slot>
+              <slot name="title">
+                Modal Title
+              </slot>
             </h3>
-            <button @click="close" class="p-1 hover:bg-gray-100 rounded-full transition-colors">
+            <button class="p-1 hover:bg-gray-100 rounded-full transition-colors" @click="close">
               <Icon name="mdi:close" class="w-5 h-5 text-gray-500" />
             </button>
           </div>
@@ -31,21 +48,6 @@
     </Transition>
   </Teleport>
 </template>
-
-<script setup lang="ts">
-interface Props {
-  modelValue: boolean
-}
-
-defineProps<Props>()
-const emit = defineEmits<{
-  'update:modelValue': [value: boolean]
-}>()
-
-function close() {
-  emit('update:modelValue', false)
-}
-</script>
 
 <style scoped>
 .modal-enter-active,

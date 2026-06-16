@@ -55,8 +55,12 @@ function handlePageChange(page: number) {
     <!-- Page Header -->
     <div class="flex items-center justify-between">
       <div>
-        <h1 class="text-2xl font-bold text-gray-900">Products</h1>
-        <p class="text-sm text-gray-500 mt-1">Manage your product catalog</p>
+        <h1 class="text-2xl font-bold text-gray-900">
+          Products
+        </h1>
+        <p class="text-sm text-gray-500 mt-1">
+          Manage your product catalog
+        </p>
       </div>
       <NuxtLink to="/products/create" class="btn-primary flex items-center gap-2">
         <Icon name="heroicons:plus" class="w-5 h-5" />
@@ -74,7 +78,7 @@ function handlePageChange(page: number) {
             type="text"
             placeholder="Search products by name or SKU..."
             class="input-field pl-10"
-          />
+          >
         </div>
       </div>
     </div>
@@ -89,7 +93,7 @@ function handlePageChange(page: number) {
       @page-change="handlePageChange"
       @row-click="(row) => router.push(`/products/${row.id}/edit`)"
     >
-      <template #cell-image="{ row }">
+      <template #cell-image>
         <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
           <Icon name="heroicons:photo" class="w-5 h-5 text-gray-400" />
         </div>

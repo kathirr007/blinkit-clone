@@ -1,60 +1,5 @@
-<template>
-  <div class="max-w-4xl mx-auto px-4 py-4">
-    <h1 class="text-xl font-bold text-gray-900 mb-4">My Orders</h1>
-
-    <!-- Empty State -->
-    <div v-if="orders.length === 0" class="text-center py-16">
-      <Icon name="mdi:receipt-text-outline" class="w-20 h-20 text-gray-300 mx-auto mb-4" />
-      <h3 class="text-lg font-medium text-gray-700 mb-2">No orders yet</h3>
-      <p class="text-gray-500 mb-6">Looks like you haven't ordered anything yet</p>
-      <NuxtLink to="/" class="btn-primary inline-block">Start Shopping</NuxtLink>
-    </div>
-
-    <!-- Orders List -->
-    <div v-else class="space-y-4">
-      <div
-        v-for="order in orders"
-        :key="order.id"
-        class="card hover:shadow-md transition-shadow cursor-pointer"
-        @click="navigateTo(`/orders/${order.id}`)"
-      >
-        <div class="flex items-start justify-between mb-3">
-          <div>
-            <p class="text-sm font-bold text-gray-900">Order {{ formatOrderNumber(order.orderNumber) }}</p>
-            <p class="text-xs text-gray-500">{{ formatDate(order.createdAt) }}</p>
-          </div>
-          <span
-            class="text-xs font-bold px-2 py-1 rounded-full"
-            :class="statusClasses(order.status)"
-          >
-            {{ statusLabel(order.status) }}
-          </span>
-        </div>
-        <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
-          <span>{{ order.items.length }} items</span>
-          <span class="text-gray-300">|</span>
-          <span class="font-medium text-gray-900">{{ formatPrice(order.total) }}</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <div class="flex -space-x-2">
-            <img
-              v-for="(item, idx) in order.items.slice(0, 3)"
-              :key="idx"
-              :src="item.image"
-              class="w-8 h-8 rounded-full border-2 border-white object-cover"
-            />
-            <div v-if="order.items.length > 3" class="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center">
-              <span class="text-[10px] font-bold text-gray-500">+{{ order.items.length - 3 }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { formatPrice, formatDate, formatOrderNumber } from '~/utils/formatters'
+import { formatDate, formatOrderNumber, formatPrice } from '~/utils/formatters'
 
 definePageMeta({
   middleware: ['auth'],
@@ -134,3 +79,70 @@ function statusLabel(status: string): string {
   }
 }
 </script>
+
+<template>
+  <div class="max-w-4xl mx-auto px-4 py-4">
+    <h1 class="text-xl font-bold text-gray-900 mb-4">
+      My Orders
+    </h1>
+
+    <!-- Empty State -->
+    <div v-if="orders.length === 0" class="text-center py-16">
+      <Icon name="mdi:receipt-text-outline" class="w-20 h-20 text-gray-300 mx-auto mb-4" />
+      <h3 class="text-lg font-medium text-gray-700 mb-2">
+        No orders yet
+      </h3>
+      <p class="text-gray-500 mb-6">
+        Looks like you haven't ordered anything yet
+      </p>
+      <NuxtLink to="/" class="btn-primary inline-block">
+        Start Shopping
+      </NuxtLink>
+    </div>
+
+    <!-- Orders List -->
+    <div v-else class="space-y-4">
+      <div
+        v-for="order in orders"
+        :key="order.id"
+        class="card hover:shadow-md transition-shadow cursor-pointer"
+        @click="navigateTo(`/orders/${order.id}`)"
+      >
+        <div class="flex items-start justify-between mb-3">
+          <div>
+            <p class="text-sm font-bold text-gray-900">
+              Order {{ formatOrderNumber(order.orderNumber) }}
+            </p>
+            <p class="text-xs text-gray-500">
+              {{ formatDate(order.createdAt) }}
+            </p>
+          </div>
+          <span
+            class="text-xs font-bold px-2 py-1 rounded-full"
+            :class="statusClasses(order.status)"
+          >
+            {{ statusLabel(order.status) }}
+          </span>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-600 mb-2">
+          <span>{{ order.items.length }} items</span>
+          <span class="text-gray-300">|</span>
+          <span class="font-medium text-gray-900">{{ formatPrice(order.total) }}</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <div class="flex -space-x-2">
+            <img
+              v-for="(item, idx) in order.items.slice(0, 3)"
+              :key="idx"
+              :src="item.image"
+              class="w-8 h-8 rounded-full border-2 border-white object-cover"
+            >
+            <div v-if="order.items.length > 3" class="w-8 h-8 rounded-full border-2 border-white bg-gray-100 flex items-center justify-center">
+              <span class="text-[10px] font-bold text-gray-500">+{{ order.items.length - 3 }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

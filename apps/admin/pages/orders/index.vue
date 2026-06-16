@@ -71,8 +71,12 @@ function viewOrder(order: any) {
   <div class="space-y-6">
     <!-- Page Header -->
     <div>
-      <h1 class="text-2xl font-bold text-gray-900">Orders</h1>
-      <p class="text-sm text-gray-500 mt-1">Manage and track customer orders</p>
+      <h1 class="text-2xl font-bold text-gray-900">
+        Orders
+      </h1>
+      <p class="text-sm text-gray-500 mt-1">
+        Manage and track customer orders
+      </p>
     </div>
 
     <!-- Status Tabs -->
@@ -85,7 +89,7 @@ function viewOrder(order: any) {
           :class="[
             activeTab === tab.key
               ? 'border-primary-600 text-primary-600'
-              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
           ]"
           @click="activeTab = tab.key"
         >

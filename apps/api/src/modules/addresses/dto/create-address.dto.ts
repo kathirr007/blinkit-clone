@@ -1,9 +1,9 @@
 import {
-  IsString,
-  IsNotEmpty,
-  IsOptional,
   IsBoolean,
+  IsNotEmpty,
   IsNumber,
+  IsOptional,
+  IsString,
   Matches,
 } from 'class-validator'
 
