@@ -1,0 +1,25 @@
+{
+  "name": "@blinkit/web",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3000",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.4",
+    "pinia": "^2.2.0",
+    "socket.io-client": "^4.7.5"
+  },
+  "devDependencies": {
+    "@nuxt/image": "^1.7.0",
+    "@nuxtjs/tailwindcss": "^6.12.0",
+    "@vueuse/nuxt": "^10.11.0",
+    "nuxt": "^3.12.0",
+    "nuxt-icon": "^0.6.10",
+    "typescript": "^5.5.0"
+  }
+}

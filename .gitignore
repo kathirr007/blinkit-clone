@@ -1,0 +1,38 @@
+node_modules/
+dist/
+.output/
+.nuxt/
+.nitro/
+.cache/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Build
+*.tsbuildinfo
+
+# Docker volumes
+docker/data/
+
+# Prisma
+apps/api/prisma/migrations/*.sql.backup
+
+# Uploads
+uploads/

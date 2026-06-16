@@ -1,0 +1,25 @@
+{
+  "name": "@blinkit/admin",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3002",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.5.4",
+    "chart.js": "^4.4.3",
+    "pinia": "^2.2.0",
+    "vue-chartjs": "^5.3.1"
+  },
+  "devDependencies": {
+    "@nuxtjs/tailwindcss": "^6.12.0",
+    "@vueuse/nuxt": "^10.11.0",
+    "nuxt": "^3.12.0",
+    "nuxt-icon": "^0.6.10",
+    "typescript": "^5.5.0"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "blinkit-clone",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:api": "pnpm --filter @blinkit/api dev",
+    "dev:web": "pnpm --filter @blinkit/web dev",
+    "dev:admin": "pnpm --filter @blinkit/admin dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write \"**/*.{ts,vue,json,md}\"",
+    "db:migrate": "pnpm --filter @blinkit/api prisma migrate dev",
+    "db:seed": "pnpm --filter @blinkit/api prisma db seed",
+    "db:studio": "pnpm --filter @blinkit/api prisma studio",
+    "docker:up": "docker compose -f docker/docker-compose.dev.yml up -d",
+    "docker:down": "docker compose -f docker/docker-compose.dev.yml down"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}
